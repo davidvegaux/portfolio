@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David Vega - Diseñador UX/UI Senior</title>
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <div class="hamburger" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="nav-left">
+                    <div class="logo-container">
+                        <img src="Images/david-vega-logo.svg" alt="David Vega Logo" class="logo">
+                    </div>
+                    <ul class="nav-links" id="nav-links">
+                        <li><a href="#proyectos">Proyectos</a></li>
+                        <li><a href="#experiencia">Experiencia</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                        <li><a href="design-system.html">Design System</a></li>
+                    </ul>
+                </div>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i id="theme-icon" data-feather="moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile">
+                <img src="Images/David-Vega-UX.jpg" alt="David Vega" class="profile-img">
+                <h1>David Vega</h1>
+                <div class="title text-2">Diseñador UX/UI Senior</div>
+                <div class="location text-3">
+                    <i data-feather="map-pin" class="icon"></i>Bogotá, Colombia
+                </div>
+            </div>
+
+            <div class="summary">
+                <p class="lead">8+ años creando productos digitales que la gente realmente quiere usar. Me especializo en transformar ideas complejas en experiencias simples e intuitivas que generan resultados reales 🚀</p>
+            </div>
+
+            <div class="contact">
+                <a href="https://www.linkedin.com/in/david-vega-ux/" target="_blank" class="btn-secondary btn-full" data-tooltip="Conectemos en LinkedIn">
+                    <i data-feather="linkedin" class="icon"></i>
+                    <span>Conectemos en LinkedIn</span>
+                </a>
+                <a href="mailto:davidvegaux@gmail.com" class="btn-secondary btn-full" data-tooltip="Escríbeme un email">
+                    <i data-feather="mail" class="icon"></i>
+                    <span>Escríbeme un email</span>
+                </a>
+                <a href="https://wa.me/573166388667?text=Hola%20David,%20vi%20tu%20portafolio%20y%20me%20voló%20la%20cabeza!%20Estoy%20interesado%20en%20tu%20trabajo,%20bro!!%20🚀" class="btn-secondary btn-full" data-tooltip="Hablemos por WhatsApp">
+                    <i data-feather="message-circle" class="icon"></i>
+                    <span>Hablemos por WhatsApp</span>
+                </a>
+                <a href="#" class="btn-primary btn-full" onclick="downloadCV()" data-tooltip="Descarga mi CV">
+                    <i data-feather="download" class="icon"></i>
+                    <span>Descarga mi CV</span>
+                </a>
+            </div>
+
+        </aside>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Projects Section -->
+            <section id="proyectos" class="section projects-section py-10 px-10">
+                <h2 class="mb-8">Proyectos destacados en: <span class="typewriter-text"></span></h2>
+                <div class="project-grid">
+                    <div class="project-card card-elevation">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=200&fit=crop" alt="Template UBITS" class="project-image">
+                        <div class="project-content p-6">
+                            <h3 class="project-title mb-2">Template UBITS</h3>
+                            <div class="project-company text-2 mb-2">UBITS</div>
+                            <p class="project-description mb-4">Plantilla definitiva para crear interfaces UBITS auténticas sin complicaciones técnicas.</p>
+                            <div class="project-tags">
+                                <span class="project-tag bg-2 text-2 px-3 py-1 rounded-full text-xs">Design system</span>
+                                <span class="project-tag bg-2 text-2 px-3 py-1 rounded-full text-xs">Vibe coding</span>
+                                <span class="project-tag bg-2 text-2 px-3 py-1 rounded-full text-xs">Cursor AI</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card card-elevation">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=200&fit=crop" alt="UBITS Shorts" class="project-image">
+                        <div class="project-content p-6">
+                            <h3 class="project-title mb-2">UBITS Shorts - "TikTok educativo"</h3>
+                            <div class="project-company text-2 mb-2">UBITS Hackathon 2025</div>
+                            <p class="project-description mb-4">Plataforma tipo TikTok para educación que ganó segundo lugar en hackathon.</p>
+                            <div class="project-tags">
+                                <span class="project-tag bg-2 text-2 px-3 py-1 rounded-full text-xs">Mobile design</span>
+                                <span class="project-tag bg-2 text-2 px-3 py-1 rounded-full text-xs">Vibe coding</span>
+                                <span class="project-tag bg-2 text-2 px-3 py-1 rounded-full text-xs">Cursor AI</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card card-elevation">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=200&fit=crop" alt="UBITS LMS" class="project-image">
+                        <div class="project-content p-6">
+                            <h3 class="project-title mb-2">Sistema LMS Propio</h3>
+                            <div class="project-company text-2 mb-2">UBITS</div>
+                            <p class="project-description mb-4">LMS completo que reemplazó Moodle, mejorando experiencia y escalabilidad.</p>
+                            <div class="project-tags">
+                                <span class="project-tag bg-2 text-2 px-3 py-1 rounded-full text-xs">UX Design</span>
+                                <span class="project-tag bg-2 text-2 px-3 py-1 rounded-full text-xs">System Design</span>
+                                <span class="project-tag bg-2 text-2 px-3 py-1 rounded-full text-xs">Accessibility</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card card-elevation">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=200&fit=crop" alt="Aprende Institute" class="project-image">
+                        <div class="project-content p-6">
+                            <h3 class="project-title mb-2">Transformación Aprende Institute</h3>
+                            <div class="project-company text-2 mb-2">Aprende Institute</div>
+                            <p class="project-description mb-4">Validación y expansión que superó 100K dólares mensuales al tercer mes.</p>
+                            <div class="project-tags">
+                                <span class="project-tag bg-2 text-2 px-3 py-1 rounded-full text-xs">Business validation</span>
+                                <span class="project-tag bg-2 text-2 px-3 py-1 rounded-full text-xs">MVP</span>
+                                <span class="project-tag bg-2 text-2 px-3 py-1 rounded-full text-xs">Leadership</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center py-10 px-5 bg-footer">
+        <p class="text-sm text-static">🔥 © 2025 · Forjado con pasión y mucho café ☕</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

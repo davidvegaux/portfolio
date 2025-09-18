@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design System - David Vega</title>
+    <meta name="description" content="Sistema de diseño completo para el portfolio de David Vega - UX/UI Designer">
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Design System specific styles */
+        .design-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .tab {
+            padding: 0.75rem 1.5rem;
+            background: var(--bg-1);
+            border: 1px solid var(--border-secondary);
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--text-2);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tab.active {
+            background: var(--bg-black);
+            color: var(--text-5);
+            border-color: var(--bg-black);
+        }
+        
+        .tab:hover:not(.active) {
+            background: var(--bg-3);
+            color: var(--text-1);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .token-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .token-card {
+            background: var(--bg-1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-primary);
+            transition: all 0.3s ease;
+        }
+        
+        .token-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .token-visual {
+            background: var(--bg-2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 80px;
+        }
+        
+        .spacing-dot {
+            border-radius: 50%;
+            background: var(--bg-accent);
+            box-shadow: 0 0 15px rgba(3, 6, 22, 0.4);
+        }
+        
+        .token-info h4 {
+            margin: 0 0 0.25rem 0;
+            font-weight: 600;
+            color: var(--text-1);
+        }
+        
+        .token-info .token-value {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-1);
+            margin-bottom: 0.5rem;
+        }
+        
+        .token-info .token-desc {
+            font-size: 0.75rem;
+            color: var(--text-3);
+            margin: 0;
+        }
+        
+        .utilities-card {
+            background: var(--bg-1);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-primary);
+        }
+        
+        .utilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .utility-section h5 {
+            margin: 0 0 0.75rem 0;
+            font-weight: 600;
+            color: var(--text-1);
+        }
+        
+        .utility-list {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-2);
+            line-height: 1.6;
+        }
+        
+        .component-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .component-card {
+            background: var(--bg-1);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-primary);
+        }
+        
+        .component-card h4 {
+            margin: 0 0 1rem 0;
+            color: var(--text-1);
+        }
+        
+        .button-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-left">
+                    <div class="logo-container">
+                        <img src="Images/david-vega-logo.svg" alt="David Vega Logo" class="logo" width="40" height="40">
+                    </div>
+                    <ul class="nav-links">
+                        <li><a href="index.html">← Volver al Portfolio</a></li>
+                    </ul>
+                </div>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <i id="theme-icon" data-feather="moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main style="margin-top: var(--space-6); background: var(--bg-2); min-height: 100vh;">
+        <div class="design-container">
+            <header class="text-center" style="margin-bottom: 3rem;">
+                <h1 style="margin-bottom: 0.5rem;">Design System</h1>
+                <p class="text-2">Sistema de diseño completo para el portfolio de David Vega</p>
+            </header>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('colors')">Colores</button>
+                <button class="tab" onclick="showTab('spacing')">Espaciado</button>
+                <button class="tab" onclick="showTab('typography')">Tipografía</button>
+                <button class="tab" onclick="showTab('borders')">Bordes</button>
+                <button class="tab" onclick="showTab('components')">Componentes</button>
+            </div>
+
+            <!-- Colors Tab -->
+            <div id="colors" class="tab-content active">
+                <h2 style="margin-bottom: 2rem;">Sistema de Colores</h2>
+                
+                <div style="margin-bottom: 3rem;">
+                    <h3 style="margin-bottom: 1rem;">Background Tokens</h3>
+                    <div class="token-grid">
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 40px; height: 40px; background: var(--bg-1); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--bg-1</h4>
+                                <div class="token-value">#ffffff</div>
+                                <p class="token-desc">Elementos de primer nivel, cards, sidebar, modales</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 40px; height: 40px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--bg-2</h4>
+                                <div class="token-value">#efeff4</div>
+                                <p class="token-desc">Fondos de página, secciones, contenedores</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 40px; height: 40px; background: var(--bg-3); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--bg-3</h4>
+                                <div class="token-value">#dcdce5</div>
+                                <p class="token-desc">Hover states, inputs</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 40px; height: 40px; background: var(--bg-footer); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--bg-footer</h4>
+                                <div class="token-value">#1a1b1c</div>
+                                <p class="token-desc">Footer, mismo color en ambos temas</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 40px; height: 40px; background: var(--bg-accent); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--bg-accent</h4>
+                                <div class="token-value">#030616 → #001f44</div>
+                                <p class="token-desc">Gradiente de acento, destacados</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 40px; height: 40px; background: var(--bg-black); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--bg-black</h4>
+                                <div class="token-value">#2a2b2d / #ffffff</div>
+                                <p class="token-desc">Botones primarios, contraste máximo</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 3rem;">
+                    <h3 style="margin-bottom: 1rem;">Glassmorphism Tokens</h3>
+                    <div class="token-grid">
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 60px; height: 40px; background: var(--glass-light); backdrop-filter: var(--glass-blur); border: 1px solid var(--border-secondary); border-radius: 8px; position: relative;">
+                                    <div style="position: absolute; inset: 0; background: var(--bg-2); opacity: 0.3; border-radius: 7px;"></div>
+                                </div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--glass-light</h4>
+                                <div class="token-value">gradient + opacity</div>
+                                <p class="token-desc">Fondo glassmorphism del nav</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 60px; height: 40px; background: var(--bg-2); border: 1px solid var(--border-secondary); border-radius: 8px; position: relative; overflow: hidden;">
+                                    <div style="position: absolute; inset: 0; backdrop-filter: var(--glass-blur); background: rgba(255,255,255,0.1);"></div>
+                                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 8px; color: var(--text-2);">BLUR</div>
+                                </div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--glass-blur</h4>
+                                <div class="token-value">blur(15px)</div>
+                                <p class="token-desc">Efecto de desenfoque del nav</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 3rem;">
+                    <h3 style="margin-bottom: 1rem;">Text Tokens</h3>
+                    <div class="token-grid">
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 40px; height: 40px; background: var(--text-1); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--text-1</h4>
+                                <div class="token-value">#1a1a1a / #e8eaed</div>
+                                <p class="token-desc">Títulos, texto principal</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 40px; height: 40px; background: var(--text-2); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--text-2</h4>
+                                <div class="token-value">#5f6368 / #9aa0a6</div>
+                                <p class="token-desc">Subtítulos, descripciones</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 40px; height: 40px; background: var(--text-3); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--text-3</h4>
+                                <div class="token-value">#9aa0a6 / #5f6368</div>
+                                <p class="token-desc">Metadatos, etiquetas</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 40px; height: 40px; background: var(--text-4); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--text-4</h4>
+                                <div class="token-value">#bdc1c6 / #3c4043</div>
+                                <p class="token-desc">Elementos deshabilitados</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 40px; height: 40px; background: var(--text-5); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--text-5</h4>
+                                <div class="token-value">#ffffff / #000000</div>
+                                <p class="token-desc">Botones primarios, contraste máximo</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 40px; height: 40px; background: var(--text-static); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--text-static</h4>
+                                <div class="token-value">#ffffff</div>
+                                <p class="token-desc">Siempre blanco (invariante)</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 40px; height: 40px; background: var(--text-tertiary); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--text-tertiary</h4>
+                                <div class="token-value">#6b7280 / #9aa0a6</div>
+                                <p class="token-desc">Botón terciario default</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 40px; height: 40px; background: var(--text-tertiary-hover); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--text-tertiary-hover</h4>
+                                <div class="token-value">#374151 / #e8eaed</div>
+                                <p class="token-desc">Botón terciario hover</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 40px; height: 40px; background: var(--bg-2); border: 2px solid var(--border-tertiary-btn); border-radius: 8px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--border-tertiary-btn</h4>
+                                <div class="token-value">transparent</div>
+                                <p class="token-desc">Border botón terciario (transparente)</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 40px; height: 40px; background: var(--bg-2); border: 2px solid var(--border-tertiary-btn-hover); border-radius: 8px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--border-tertiary-btn-hover</h4>
+                                <div class="token-value">#9ca3af / #ffffff</div>
+                                <p class="token-desc">Border botón terciario hover</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 40px; height: 40px; background: var(--theme-toggle-bg-hover); border: 1px solid var(--theme-toggle-border); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--theme-toggle-text-hover);">☀️</div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--theme-toggle-bg-hover</h4>
+                                <div class="token-value">var(--bg-accent)</div>
+                                <p class="token-desc">Fondo theme toggle hover</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 40px; height: 40px; background: var(--theme-toggle-bg); border: 1px solid var(--theme-toggle-border); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--theme-toggle-text);">🌙</div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--theme-toggle-bg</h4>
+                                <div class="token-value">transparent</div>
+                                <p class="token-desc">Fondo theme toggle default</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spacing Tab -->
+            <div id="spacing" class="tab-content">
+                <h2 style="margin-bottom: 2rem;">Sistema de Espaciado</h2>
+                <p class="text-2" style="margin-bottom: 2rem;">Tokens básicos de espaciado - Solo los que realmente se usan en el proyecto.</p>
+                
+                <div style="margin-bottom: 3rem;">
+                    <h3 style="margin-bottom: 1rem;">Tokens de Espaciado</h3>
+                    <div class="token-grid">
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div class="spacing-dot" style="width: 4px; height: 4px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--space-1</h4>
+                                <div class="token-value">0.25rem (4px)</div>
+                                <p class="token-desc">Espaciado mínimo</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div class="spacing-dot" style="width: 8px; height: 8px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--space-2</h4>
+                                <div class="token-value">0.5rem (8px)</div>
+                                <p class="token-desc">Márgenes pequeños</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div class="spacing-dot" style="width: 12px; height: 12px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--space-3</h4>
+                                <div class="token-value">0.75rem (12px)</div>
+                                <p class="token-desc">Padding compacto</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div class="spacing-dot" style="width: 16px; height: 16px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--space-4</h4>
+                                <div class="token-value">1rem (16px)</div>
+                                <p class="token-desc">Espaciado estándar</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div class="spacing-dot" style="width: 20px; height: 20px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--space-5</h4>
+                                <div class="token-value">1.25rem (20px)</div>
+                                <p class="token-desc">Padding medio</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div class="spacing-dot" style="width: 24px; height: 24px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--space-6</h4>
+                                <div class="token-value">1.5rem (24px)</div>
+                                <p class="token-desc">Sidebar offset, padding cards</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div class="spacing-dot" style="width: 28px; height: 28px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--space-7</h4>
+                                <div class="token-value">1.75rem (28px)</div>
+                                <p class="token-desc">Espaciado intermedio</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div class="spacing-dot" style="width: 32px; height: 32px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--space-8</h4>
+                                <div class="token-value">2rem (32px)</div>
+                                <p class="token-desc">Márgenes grandes</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div class="spacing-dot" style="width: 40px; height: 40px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--space-10</h4>
+                                <div class="token-value">2.5rem (40px)</div>
+                                <p class="token-desc">Sidebar offset, padding footer</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div class="spacing-dot" style="width: 64px; height: 64px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--space-16</h4>
+                                <div class="token-value">4rem (64px)</div>
+                                <p class="token-desc">Padding secciones</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 style="margin-bottom: 1rem;">Utilities Disponibles</h3>
+                    <div class="utilities-card">
+                        <h4 style="margin-bottom: 1rem;">Clases de Espaciado</h4>
+                        <div class="utilities-grid">
+                            <div class="utility-section">
+                                <h5>Padding</h5>
+                                <div class="utility-list">
+                                    <div>.p-1 → 4px</div>
+                                    <div>.p-6 → 24px</div>
+                                    <div>.px-3 → 12px horizontal</div>
+                                    <div>.px-5 → 20px horizontal</div>
+                                    <div>.px-10 → 40px horizontal</div>
+                                    <div>.py-1 → 4px vertical</div>
+                                    <div>.py-10 → 40px vertical</div>
+                                    <div>.py-16 → 64px vertical</div>
+                                </div>
+                            </div>
+                            <div class="utility-section">
+                                <h5>Margin</h5>
+                                <div class="utility-list">
+                                    <div>.mb-2 → 8px bottom</div>
+                                    <div>.mb-4 → 16px bottom</div>
+                                    <div>.mb-8 → 32px bottom</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typography Tab -->
+            <div id="typography" class="tab-content">
+                <h2 style="margin-bottom: 2rem;">Sistema Tipográfico</h2>
+                
+                <div class="token-grid">
+                    <div class="token-card">
+                        <h1>Heading 1</h1>
+                        <div class="token-value">2.5rem (40px) - font-weight: 800</div>
+                        <p class="token-desc">Títulos principales, nombres</p>
+                    </div>
+                    <div class="token-card">
+                        <h2>Heading 2</h2>
+                        <div class="token-value">2rem (32px) - font-weight: 700</div>
+                        <p class="token-desc">Secciones principales</p>
+                    </div>
+                    <div class="token-card">
+                        <h3>Heading 3</h3>
+                        <div class="token-value">1.5rem (24px) - font-weight: 600</div>
+                        <p class="token-desc">Subtítulos</p>
+                    </div>
+                    <div class="token-card">
+                        <p>Body text</p>
+                        <div class="token-value">1rem (16px) - font-weight: 400</div>
+                        <p class="token-desc">Contenido principal</p>
+                    </div>
+                    <div class="token-card">
+                        <p class="lead">Lead paragraph</p>
+                        <div class="token-value">1.25rem (20px) - font-weight: 300</div>
+                        <p class="token-desc">Introducciones importantes</p>
+                    </div>
+                    <div class="token-card">
+                        <p class="text-sm">Small text</p>
+                        <div class="token-value">0.875rem (14px) - font-weight: 400</div>
+                        <p class="token-desc">Información secundaria</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Borders Tab -->
+            <div id="borders" class="tab-content">
+                <h2 style="margin-bottom: 2rem;">Sistema de Bordes</h2>
+                
+                <div>
+                    <h3 style="margin-bottom: 1rem;">Border Colors</h3>
+                    <div class="token-grid">
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 40px; height: 40px; background: var(--bg-2); border: 4px solid var(--border-primary); border-radius: 8px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--border-primary</h4>
+                                <div class="token-value">#dadce0 / #5f6368</div>
+                                <p class="token-desc">Bordes principales, inputs</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 40px; height: 40px; background: var(--bg-2); border: 4px solid var(--border-secondary); border-radius: 8px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--border-secondary</h4>
+                                <div class="token-value">#e8eaed / #3c4043</div>
+                                <p class="token-desc">Nav, cards, separadores</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 40px; height: 40px; background: var(--bg-2); border: 4px solid var(--border-tertiary); border-radius: 8px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--border-tertiary</h4>
+                                <div class="token-value">#f1f3f4 / #2d2e30</div>
+                                <p class="token-desc">Bordes sutiles, líneas</p>
+                            </div>
+                        </div>
+                        <div class="token-card">
+                            <div class="token-visual">
+                                <div style="width: 40px; height: 40px; background: var(--bg-2); border: 4px solid var(--border-focus); border-radius: 8px;"></div>
+                            </div>
+                            <div class="token-info">
+                                <h4>--border-focus</h4>
+                                <div class="token-value">#4285F4 / #8AB4F8</div>
+                                <p class="token-desc">Estados de foco, activos</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Components Tab -->
+            <div id="components" class="tab-content">
+                <h2 style="margin-bottom: 2rem;">Componentes</h2>
+                
+                <div class="component-showcase">
+                    <div class="component-card">
+                        <h4>Jerarquía de Botones</h4>
+                        <div class="button-demo">
+                            <button class="btn-primary">Primario</button>
+                            <button class="btn-secondary">Secundario</button>
+                            <button class="btn-tertiary">Terciario</button>
+                        </div>
+                        <p class="text-sm text-2">Botón primario para acciones principales, secundario para soporte, terciario para acciones sutiles.</p>
+                    </div>
+                    
+                    <div class="component-card">
+                        <h4>Theme Toggle</h4>
+                        <div class="component-demo">
+                            <button class="theme-toggle" id="demo-theme-toggle">
+                                <i data-feather="sun" id="demo-theme-icon"></i>
+                            </button>
+                        </div>
+                        <p class="text-sm text-2">Botón de cambio de tema con rotación, shimmer y tooltip. Hover para ver efectos.</p>
+                    </div>
+                    
+                    <div class="component-card">
+                        <h4>Project Cards</h4>
+                        <div class="project-card card-elevation" style="max-width: 250px;">
+                            <div class="project-content p-6">
+                                <h5 class="text-1" style="margin-bottom: 0.5rem;">Ejemplo Card</h5>
+                                <p class="text-2 text-sm" style="margin-bottom: 0.75rem;">Este es un ejemplo de card de proyecto.</p>
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <span class="project-tag bg-2 text-2 px-3 py-1 rounded-full text-xs">Tag</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="component-card">
+                        <h4>Tokens de Estado</h4>
+                        <div class="button-demo">
+                            <button class="btn-success btn-sm">Éxito</button>
+                            <button class="btn-error btn-sm">Error</button>
+                            <button class="btn-warning btn-sm">Advertencia</button>
+                            <button class="btn-info btn-sm">Info</button>
+                        </div>
+                        <p class="text-sm text-2">Botones para estados específicos del sistema.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-center bg-footer" style="padding: 2.5rem 1.25rem;">
+        <p class="text-sm text-static">🔥 Design System · Forjado con pasión y mucho café ☕</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Tab functionality
+        function showTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            const targetContent = document.getElementById(tabName);
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
