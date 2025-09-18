@@ -369,10 +369,10 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 24px;
+    padding: var(--space-3) var(--space-6);
     background: var(--bg-2);
-    border: 1px solid var(--border-primary);
-    border-radius: 8px;
+    border: var(--border-width) solid var(--border-primary);
+    border-radius: var(--radius);
     text-decoration: none;
     color: var(--text-1);
     font-weight: 500;
@@ -384,9 +384,9 @@ body {
 }
 
 .btn-secondary .icon {
-    width: 16px;
-    height: 16px;
-    margin-right: 8px;
+    width: var(--size-icon-sm);
+    height: var(--size-icon-sm);
+    margin-right: var(--space-2);
     color: var(--text-1);
     transition: color 0.3s ease;
 }
@@ -433,10 +433,10 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 12px 24px;
+    padding: var(--space-3) var(--space-6);
     background: transparent;
-    border: 1px solid var(--border-tertiary-btn);
-    border-radius: 8px;
+    border: var(--border-width) solid var(--border-tertiary-btn);
+    border-radius: var(--radius);
     text-decoration: none;
     color: var(--text-tertiary);
     font-weight: 500;
@@ -448,9 +448,9 @@ body {
 }
 
 .btn-tertiary .icon {
-    width: 16px;
-    height: 16px;
-    margin-right: 8px;
+    width: var(--size-icon-sm);
+    height: var(--size-icon-sm);
+    margin-right: var(--space-2);
     color: var(--text-tertiary);
     transition: color 0.3s ease;
 }
@@ -472,13 +472,13 @@ body {
 /* Button width variants */
 .btn-full {
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: var(--space-2);
 }
 
 /* Contact buttons specific spacing */
 .contact .btn-secondary,
 .contact .btn-primary {
-    margin-bottom: 10px;
+    margin-bottom: var(--space-2);
 }
 
 /* Button variants de status */
@@ -528,12 +528,12 @@ body {
 .nav-left {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: var(--space-5);
 }
 
 .nav-links {
     display: flex;
-    gap: 30px;
+    gap: var(--space-7);
     list-style: none;
     margin: 0;
     padding: 0;
@@ -548,16 +548,16 @@ body {
     display: none;
     flex-direction: column;
     cursor: pointer;
-    padding: 5px;
+    padding: var(--space-1);
 }
 
 .hamburger span {
-    width: 25px;
-    height: 3px;
+    width: var(--space-6);
+    height: var(--space-1);
     background: var(--text-1);
-    margin: 3px 0;
+    margin: var(--space-1) 0;
     transition: 0.3s;
-    border-radius: 2px;
+    border-radius: var(--radius-sm);
 }
 
 .hamburger.active span:nth-child(1) {
@@ -586,14 +586,14 @@ body {
 /* Theme Toggle Component */
 .theme-toggle {
     background: var(--theme-toggle-bg);
-    border: 1px solid var(--theme-toggle-border);
+    border: var(--border-width) solid var(--theme-toggle-border);
     border-radius: 50%;
     width: var(--space-10);
     height: var(--space-10);
     padding: 0;
     cursor: pointer;
     color: var(--theme-toggle-text);
-    font-size: 14px;
+    font-size: var(--text-base);
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
@@ -658,19 +658,19 @@ body {
     content: "Cambiar a modo oscuro";
     position: absolute;
     left: 50%;
-    top: 50px;
+    top: var(--space-12);
     transform: translateX(-50%);
     background: var(--bg-2);
     color: var(--text-1);
     padding: var(--space-2) var(--space-3);
     border-radius: var(--space-2);
-    font-size: 12px;
+    font-size: var(--text-sm);
     font-weight: 500;
     white-space: nowrap;
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
-    border: 1px solid var(--theme-toggle-border);
+    border: var(--border-width) solid var(--theme-toggle-border);
     box-shadow: var(--theme-toggle-shadow);
     z-index: 1000;
 }
@@ -690,22 +690,22 @@ body {
 
 /* Container */
 .container {
-    max-width: 1200px;
+    max-width: var(--size-container-max);
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 var(--space-5);
 }
 
 .nav .container {
     max-width: none;
-    padding: 0 20px;
+    padding: 0 var(--space-5);
 }
 
 /* Main Layout */
 .main {
     display: grid;
-    grid-template-columns: 400px 1fr;
-    gap: 0px;
-    margin-top: 0px;
+    grid-template-columns: var(--size-sidebar-width) 1fr;
+    gap: 0;
+    margin-top: 0;
     min-height: 100vh;
 }
 
@@ -725,16 +725,16 @@ body {
 
 .profile {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: var(--space-7);
 }
 
 .profile-img {
-    width: 150px;
-    height: 150px;
+    width: var(--size-profile);
+    height: var(--size-profile);
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 20px;
-    border: 3px solid var(--border-primary);
+    margin-bottom: var(--space-5);
+    border: var(--border-width-lg) solid var(--border-primary);
     transition: all 0.3s ease;
     animation: circleReveal 0.8s ease-out 0.3s both;
 }
@@ -746,37 +746,37 @@ body {
 
 .sidebar h1 {
     font-size: 1.8rem;
-    margin-bottom: 10px;
+    margin-bottom: var(--space-2);
     color: var(--text-1);
 }
 
 .title {
     font-size: 1.1rem;
     color: var(--text-2);
-    margin-bottom: 10px;
+    margin-bottom: var(--space-2);
     font-weight: 500;
 }
 
 .location {
     color: var(--text-2);
     font-size: 0.9rem;
-    margin-bottom: 20px;
+    margin-bottom: var(--space-5);
 }
 
 .summary {
-    margin-bottom: 30px;
+    margin-bottom: var(--space-7);
     color: var(--text-2);
     line-height: 1.6;
     font-size: 0.95rem;
 }
 
 .contact {
-    margin-bottom: 30px;
+    margin-bottom: var(--space-7);
 }
 
 .contact h3 {
     color: var(--text-1);
-    margin-bottom: 15px;
+    margin-bottom: var(--space-4);
     font-size: 1.1rem;
 }
 
@@ -804,7 +804,7 @@ body {
 
 .section h2 {
     font-size: 24px;
-    margin-bottom: 30px;
+    margin-bottom: var(--space-7);
     color: var(--text-1);
 }
 
@@ -845,7 +845,7 @@ body {
 }
 
 .project-content {
-    padding: 20px;
+    padding: var(--space-5);
 }
 
 .project-title {
@@ -1012,13 +1012,13 @@ body {
 
     /* Paddings laterales reducidos en mobile para proyectos */
     .projects-section {
-        padding-left: 20px;
-        padding-right: 20px;
+        padding-left: var(--space-5);
+        padding-right: var(--space-5);
     }
 
     .project-grid {
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: var(--space-7);
     }
 
     .nav-links {
@@ -1030,8 +1030,8 @@ body {
         background: var(--bg-1);
         border-bottom: 1px solid var(--border-primary);
         flex-direction: column;
-        padding: 20px;
-        gap: 15px;
+        padding: var(--space-5);
+        gap: var(--space-4);
     }
 
     .nav-links.active {
@@ -1049,7 +1049,7 @@ body {
 
 @media (max-width: 768px) {
     .main {
-        margin-top: 20px;
+        margin-top: var(--space-5);
     }
 
     .nav {
@@ -1057,15 +1057,15 @@ body {
     }
 
     .profile-img {
-        width: 120px;
-        height: 120px;
+        width: var(--size-profile-sm);
+        height: var(--size-profile-sm);
     }
 
     .sidebar {
         position: static;
         height: auto;
         overflow-y: visible;
-        margin-bottom: 20px;
+        margin-bottom: var(--space-5);
     }
 }
 
