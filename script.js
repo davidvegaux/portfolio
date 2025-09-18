@@ -103,12 +103,12 @@ document.addEventListener('DOMContentLoaded', function() {
         ];
         
         const colors = [
-            'var(--google-blue)',
-            'var(--google-red)',
-            'var(--google-yellow)',
-            'var(--google-green)',
-            'var(--google-purple)',
-            'var(--google-orange)'
+            'var(--vegeta)',
+            'var(--seiya)',
+            'var(--saiyajin)',
+            'var(--piccolo)',
+            'var(--beerus)',
+            'var(--samurai-x)'
         ];
         
         let currentSkillIndex = 0;
@@ -176,6 +176,39 @@ document.addEventListener('DOMContentLoaded', function() {
         
         window.addEventListener('scroll', requestTick);
     }
+});
+
+// Project card focus effect
+function initProjectCardFocus() {
+    const projectGrid = document.querySelector('.project-grid');
+    const projectCards = document.querySelectorAll('.project-card');
+    
+    if (projectGrid && projectCards.length > 0) {
+        projectCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                projectGrid.classList.add('has-hover');
+                projectCards.forEach(otherCard => {
+                    if (otherCard !== card) {
+                        otherCard.classList.remove('is-hovered');
+                    }
+                });
+                card.classList.add('is-hovered');
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                projectGrid.classList.remove('has-hover');
+                card.classList.remove('is-hovered');
+                projectCards.forEach(otherCard => {
+                    otherCard.classList.remove('is-hovered');
+                });
+            });
+        });
+    }
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initProjectCardFocus();
 });
 
 

@@ -4,15 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Design System - David Vega</title>
-    <meta name="description" content="Sistema de diseño completo para el portfolio de David Vega - UX/UI Designer">
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Design System specific styles */
+        body {
+            background: var(--bg-2);
+        }
+        
         .design-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 3rem 2rem;
+            padding: 2rem;
+            padding-top: 6rem;
+            min-height: 100vh;
         }
         
         .tabs {
@@ -25,7 +29,7 @@
         .tab {
             padding: 0.75rem 1.5rem;
             background: var(--bg-1);
-            border: 1px solid var(--border-secondary);
+            border: 1px solid var(--border-primary);
             border-radius: 8px;
             cursor: pointer;
             color: var(--text-2);
@@ -39,11 +43,6 @@
             border-color: var(--bg-black);
         }
         
-        .tab:hover:not(.active) {
-            background: var(--bg-3);
-            color: var(--text-1);
-        }
-        
         .tab-content {
             display: none;
         }
@@ -52,14 +51,14 @@
             display: block;
         }
         
-        .token-grid {
+        .demo-grid, .token-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1rem;
-            margin-bottom: 2rem;
+            margin: 2rem 0;
         }
         
-        .token-card {
+        .demo-card, .token-card {
             background: var(--bg-1);
             padding: 1.5rem;
             border-radius: 12px;
@@ -67,11 +66,17 @@
             transition: all 0.3s ease;
         }
         
-        .token-card:hover {
+        .demo-card:hover, .token-card:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-lg);
         }
         
+        .demo-card h4, .token-card h4 {
+            margin: 0 0 1rem 0;
+            color: var(--text-1);
+            font-weight: 600;
+        }
+
         .token-visual {
             background: var(--bg-2);
             border-radius: 8px;
@@ -82,81 +87,27 @@
             justify-content: center;
             height: 80px;
         }
-        
-        .spacing-dot {
-            border-radius: 50%;
-            background: var(--bg-accent);
-            box-shadow: 0 0 15px rgba(3, 6, 22, 0.4);
-        }
-        
-        .token-info h4 {
-            margin: 0 0 0.25rem 0;
-            font-weight: 600;
-            color: var(--text-1);
-        }
-        
+
         .token-info .token-value {
             font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
             font-size: 0.75rem;
             color: var(--text-1);
             margin-bottom: 0.5rem;
         }
-        
+
         .token-info .token-desc {
             font-size: 0.75rem;
             color: var(--text-3);
             margin: 0;
         }
-        
-        .utilities-card {
-            background: var(--bg-1);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-primary);
+
+        /* Header styles */
+        .text-center {
+            text-align: center;
         }
-        
-        .utilities-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-        }
-        
-        .utility-section h5 {
-            margin: 0 0 0.75rem 0;
-            font-weight: 600;
-            color: var(--text-1);
-        }
-        
-        .utility-list {
-            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-            font-size: 0.75rem;
+
+        .text-2 {
             color: var(--text-2);
-            line-height: 1.6;
-        }
-        
-        .component-showcase {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .component-card {
-            background: var(--bg-1);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-primary);
-        }
-        
-        .component-card h4 {
-            margin: 0 0 1rem 0;
-            color: var(--text-1);
-        }
-        
-        .button-demo {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
         }
     </style>
 </head>
@@ -165,12 +116,20 @@
     <nav class="nav">
         <div class="container">
             <div class="nav-content">
+                <div class="hamburger" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
                 <div class="nav-left">
                     <div class="logo-container">
-                        <img src="Images/david-vega-logo.svg" alt="David Vega Logo" class="logo" width="40" height="40">
+                        <img src="Images/david-vega-logo.svg" alt="David Vega Logo" class="logo">
                     </div>
-                    <ul class="nav-links">
-                        <li><a href="index.html">← Volver al Portfolio</a></li>
+                    <ul class="nav-links" id="nav-links">
+                        <li><a href="index.html">Portfolio</a></li>
+                        <li><a href="#proyectos">Proyectos</a></li>
+                        <li><a href="#experiencia">Experiencia</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
                     </ul>
                 </div>
                 <button class="theme-toggle" onclick="toggleTheme()">
@@ -180,881 +139,710 @@
         </div>
     </nav>
 
-    <main style="margin-top: var(--space-6); background: var(--bg-2); min-height: 100vh;">
-        <div class="design-container">
-            <header class="text-center" style="margin-bottom: 3rem;">
-                <h1 style="margin-bottom: 0.5rem;">Design System</h1>
-                <p class="text-2">Sistema de diseño completo para el portfolio de David Vega</p>
-            </header>
+    <div class="design-container">
+        <header class="text-center" style="margin-bottom: 3rem;">
+            <h1 style="margin-bottom: 0.5rem;">Design System</h1>
+            <p class="text-2">Sistema de diseño completo para el portfolio de David Vega</p>
+        </header>
 
-            <!-- Tabs -->
-            <div class="tabs">
-                <button class="tab active" onclick="showTab('colors')">Colores</button>
-                <button class="tab" onclick="showTab('spacing')">Espaciado</button>
-                <button class="tab" onclick="showTab('sizes')">Tamaños</button>
-                <button class="tab" onclick="showTab('radius')">Radius</button>
-                <button class="tab" onclick="showTab('typography')">Tipografía</button>
-                <button class="tab" onclick="showTab('borders')">Bordes</button>
-                <button class="tab" onclick="showTab('components')">Componentes</button>
-            </div>
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('colors')">Colores</button>
+            <button class="tab" onclick="showTab('typography')">Tipografía</button>
+            <button class="tab" onclick="showTab('spacing')">Espaciado</button>
+            <button class="tab" onclick="showTab('radius')">Radius</button>
+            <button class="tab" onclick="showTab('elevation')">Elevación</button>
+            <button class="tab" onclick="showTab('borders')">Bordes</button>
+            <button class="tab" onclick="showTab('components')">Componentes</button>
+        </div>
 
-            <!-- Colors Tab -->
-            <div id="colors" class="tab-content active">
-                <h2 style="margin-bottom: 2rem;">Sistema de Colores</h2>
-                
-                <div style="margin-bottom: 3rem;">
-                    <h3 style="margin-bottom: 1rem;">Background Tokens</h3>
-                    <div class="token-grid">
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 40px; height: 40px; background: var(--bg-1); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--bg-1</h4>
-                                <div class="token-value">#ffffff</div>
-                                <p class="token-desc">Elementos de primer nivel, cards, sidebar, modales</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 40px; height: 40px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--bg-2</h4>
-                                <div class="token-value">#efeff4</div>
-                                <p class="token-desc">Fondos de página, secciones, contenedores</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 40px; height: 40px; background: var(--bg-3); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--bg-3</h4>
-                                <div class="token-value">#dcdce5</div>
-                                <p class="token-desc">Hover states, inputs</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 40px; height: 40px; background: var(--bg-footer); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--bg-footer</h4>
-                                <div class="token-value">#1a1b1c</div>
-                                <p class="token-desc">Footer, mismo color en ambos temas</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 40px; height: 40px; background: var(--bg-accent); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--bg-accent</h4>
-                                <div class="token-value">#030616 → #001f44</div>
-                                <p class="token-desc">Gradiente de acento, destacados</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 40px; height: 40px; background: var(--bg-black); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--bg-black</h4>
-                                <div class="token-value">#2a2b2d / #ffffff</div>
-                                <p class="token-desc">Botones primarios, contraste máximo</p>
-                            </div>
-                        </div>
+        <!-- Colors Tab -->
+        <div id="colors" class="tab-content active">
+            <h2 style="margin-bottom: 2rem;">Sistema de Colores</h2>
+            
+            <div style="margin-bottom: 3rem;">
+                <h3 style="margin-bottom: 1.5rem;">Background Tokens</h3>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--bg-1); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--bg-1</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#ffffff - Elementos de primer nivel, cards, sidebar</p>
                     </div>
-                </div>
-
-                <div style="margin-bottom: 3rem;">
-                    <h3 style="margin-bottom: 1rem;">Glassmorphism Tokens</h3>
-                    <div class="token-grid">
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 60px; height: 40px; background: var(--glass-light); backdrop-filter: var(--glass-blur); border: 1px solid var(--border-secondary); border-radius: 8px; position: relative;">
-                                    <div style="position: absolute; inset: 0; background: var(--bg-2); opacity: 0.3; border-radius: 7px;"></div>
-                                </div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--glass-light</h4>
-                                <div class="token-value">gradient + opacity</div>
-                                <p class="token-desc">Fondo glassmorphism del nav</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 60px; height: 40px; background: var(--bg-2); border: 1px solid var(--border-secondary); border-radius: 8px; position: relative; overflow: hidden;">
-                                    <div style="position: absolute; inset: 0; backdrop-filter: var(--glass-blur); background: rgba(255,255,255,0.1);"></div>
-                                    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 8px; color: var(--text-2);">BLUR</div>
-                                </div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--glass-blur</h4>
-                                <div class="token-value">blur(15px)</div>
-                                <p class="token-desc">Efecto de desenfoque del nav</p>
-                            </div>
-                        </div>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--bg-2</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#efeff4 - Fondos de página, secciones</p>
                     </div>
-                </div>
-
-                <div style="margin-bottom: 3rem;">
-                    <h3 style="margin-bottom: 1rem;">Text Tokens</h3>
-                    <div class="token-grid">
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 40px; height: 40px; background: var(--text-1); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--text-1</h4>
-                                <div class="token-value">#1a1a1a / #e8eaed</div>
-                                <p class="token-desc">Títulos, texto principal</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 40px; height: 40px; background: var(--text-2); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--text-2</h4>
-                                <div class="token-value">#5f6368 / #9aa0a6</div>
-                                <p class="token-desc">Subtítulos, descripciones</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 40px; height: 40px; background: var(--text-3); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--text-3</h4>
-                                <div class="token-value">#9aa0a6 / #5f6368</div>
-                                <p class="token-desc">Metadatos, etiquetas</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 40px; height: 40px; background: var(--text-4); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--text-4</h4>
-                                <div class="token-value">#bdc1c6 / #3c4043</div>
-                                <p class="token-desc">Elementos deshabilitados</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 40px; height: 40px; background: var(--text-5); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--text-5</h4>
-                                <div class="token-value">#ffffff / #000000</div>
-                                <p class="token-desc">Botones primarios, contraste máximo</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 40px; height: 40px; background: var(--text-static); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--text-static</h4>
-                                <div class="token-value">#ffffff</div>
-                                <p class="token-desc">Siempre blanco (invariante)</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 40px; height: 40px; background: var(--text-tertiary); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--text-tertiary</h4>
-                                <div class="token-value">#6b7280 / #9aa0a6</div>
-                                <p class="token-desc">Botón terciario default</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 40px; height: 40px; background: var(--text-tertiary-hover); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--text-tertiary-hover</h4>
-                                <div class="token-value">#374151 / #e8eaed</div>
-                                <p class="token-desc">Botón terciario hover</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 40px; height: 40px; background: var(--bg-2); border: 2px solid var(--border-tertiary-btn); border-radius: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--border-tertiary-btn</h4>
-                                <div class="token-value">transparent</div>
-                                <p class="token-desc">Border botón terciario (transparente)</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 40px; height: 40px; background: var(--bg-2); border: 2px solid var(--border-tertiary-btn-hover); border-radius: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--border-tertiary-btn-hover</h4>
-                                <div class="token-value">#9ca3af / #ffffff</div>
-                                <p class="token-desc">Border botón terciario hover</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 40px; height: 40px; background: var(--theme-toggle-bg-hover); border: 1px solid var(--theme-toggle-border); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--theme-toggle-text-hover);">☀️</div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--theme-toggle-bg-hover</h4>
-                                <div class="token-value">var(--bg-accent)</div>
-                                <p class="token-desc">Fondo theme toggle hover</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 40px; height: 40px; background: var(--theme-toggle-bg); border: 1px solid var(--theme-toggle-border); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--theme-toggle-text);">🌙</div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--theme-toggle-bg</h4>
-                                <div class="token-value">transparent</div>
-                                <p class="token-desc">Fondo theme toggle default</p>
-                            </div>
-                        </div>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--bg-3); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--bg-3</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#dcdce5 - Hover states, inputs</p>
+                    </div>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--bg-black); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--bg-black</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#2a2b2d - Botones primarios, contraste máximo</p>
+                    </div>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--bg-accent); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--bg-accent</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">Gradiente de acento, destacados</p>
+                    </div>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--bg-footer); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--bg-footer</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#1a1b1c - Footer, mismo color en ambos temas</p>
+                    </div>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--theme-toggle-bg-hover); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--theme-toggle-bg-hover</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">Fondo del botón theme toggle hover</p>
+                    </div>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--theme-toggle-bg); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--theme-toggle-bg</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">Fondo del botón theme toggle default</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Spacing Tab -->
-            <div id="spacing" class="tab-content">
-                <h2 style="margin-bottom: 2rem;">Sistema de Espaciado</h2>
-                <p class="text-2" style="margin-bottom: 2rem;">Tokens básicos de espaciado - Solo los que realmente se usan en el proyecto.</p>
-                
-                <div style="margin-bottom: 3rem;">
-                    <h3 style="margin-bottom: 1rem;">Tokens de Espaciado</h3>
-                    <div class="token-grid">
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div class="spacing-dot" style="width: 4px; height: 4px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--space-1</h4>
-                                <div class="token-value">0.25rem (4px)</div>
-                                <p class="token-desc">Espaciado mínimo</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div class="spacing-dot" style="width: 8px; height: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--space-2</h4>
-                                <div class="token-value">0.5rem (8px)</div>
-                                <p class="token-desc">Márgenes pequeños</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div class="spacing-dot" style="width: 12px; height: 12px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--space-3</h4>
-                                <div class="token-value">0.75rem (12px)</div>
-                                <p class="token-desc">Padding compacto</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div class="spacing-dot" style="width: 16px; height: 16px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--space-4</h4>
-                                <div class="token-value">1rem (16px)</div>
-                                <p class="token-desc">Espaciado estándar</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div class="spacing-dot" style="width: 20px; height: 20px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--space-5</h4>
-                                <div class="token-value">1.25rem (20px)</div>
-                                <p class="token-desc">Padding medio</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div class="spacing-dot" style="width: 24px; height: 24px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--space-6</h4>
-                                <div class="token-value">1.5rem (24px)</div>
-                                <p class="token-desc">Sidebar offset, padding cards</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div class="spacing-dot" style="width: 28px; height: 28px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--space-7</h4>
-                                <div class="token-value">1.75rem (28px)</div>
-                                <p class="token-desc">Espaciado intermedio</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div class="spacing-dot" style="width: 32px; height: 32px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--space-8</h4>
-                                <div class="token-value">2rem (32px)</div>
-                                <p class="token-desc">Márgenes grandes</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div class="spacing-dot" style="width: 40px; height: 40px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--space-10</h4>
-                                <div class="token-value">2.5rem (40px)</div>
-                                <p class="token-desc">Sidebar offset, padding footer</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div class="spacing-dot" style="width: 64px; height: 64px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--space-16</h4>
-                                <div class="token-value">4rem (64px)</div>
-                                <p class="token-desc">Padding secciones</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div class="spacing-dot" style="width: 48px; height: 48px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--space-12</h4>
-                                <div class="token-value">3rem (48px)</div>
-                                <p class="token-desc">Tooltip positioning</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div class="spacing-dot" style="width: 60px; height: 60px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--space-15</h4>
-                                <div class="token-value">3.75rem (60px)</div>
-                                <p class="token-desc">Espaciado intermedio</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div class="spacing-dot" style="width: 80px; height: 80px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--space-20</h4>
-                                <div class="token-value">5rem (80px)</div>
-                                <p class="token-desc">Espaciado grande</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div class="spacing-dot" style="width: 96px; height: 96px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--space-24</h4>
-                                <div class="token-value">6rem (96px)</div>
-                                <p class="token-desc">Espaciado muy grande</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div class="spacing-dot" style="width: 120px; height: 120px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--space-30</h4>
-                                <div class="token-value">7.5rem (120px)</div>
-                                <p class="token-desc">Espaciado extra grande</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div class="spacing-dot" style="width: 160px; height: 160px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--space-40</h4>
-                                <div class="token-value">10rem (160px)</div>
-                                <p class="token-desc">Espaciado máximo</p>
-                            </div>
-                        </div>
+            <div style="margin-bottom: 3rem;">
+                <h3>Text Tokens</h3>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--text-1); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--text-1</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#1a1a1a - Títulos, texto principal</p>
                     </div>
-                </div>
-
-                <div>
-                    <h3 style="margin-bottom: 1rem;">Utilities Disponibles</h3>
-                    <div class="utilities-card">
-                        <h4 style="margin-bottom: 1rem;">Clases de Espaciado</h4>
-                        <div class="utilities-grid">
-                            <div class="utility-section">
-                                <h5>Padding</h5>
-                                <div class="utility-list">
-                                    <div>.p-1 → 4px</div>
-                                    <div>.p-6 → 24px</div>
-                                    <div>.px-3 → 12px horizontal</div>
-                                    <div>.px-5 → 20px horizontal</div>
-                                    <div>.px-10 → 40px horizontal</div>
-                                    <div>.py-1 → 4px vertical</div>
-                                    <div>.py-10 → 40px vertical</div>
-                                    <div>.py-16 → 64px vertical</div>
-                                </div>
-                            </div>
-                            <div class="utility-section">
-                                <h5>Margin</h5>
-                                <div class="utility-list">
-                                    <div>.mb-2 → 8px bottom</div>
-                                    <div>.mb-4 → 16px bottom</div>
-                                    <div>.mb-8 → 32px bottom</div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--text-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--text-2</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#5f6368 - Subtítulos, descripciones</p>
+                    </div>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--text-3); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--text-3</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#9aa0a6 - Metadatos, etiquetas</p>
+                    </div>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--text-4); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--text-4</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#bdc1c6 - Elementos deshabilitados</p>
+                    </div>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--text-5); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--text-5</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#ffffff - Botones primarios, contraste máximo</p>
+                    </div>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--text-static); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--text-static</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#ffffff - Siempre blanco (invariante)</p>
+                    </div>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--text-tertiary); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--text-tertiary</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#6b7280 - Botón terciario default</p>
+                    </div>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--text-tertiary-hover); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--text-tertiary-hover</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#374151 - Botón terciario hover</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Sizes Tab -->
-            <div id="sizes" class="tab-content">
-                <h2 style="margin-bottom: 2rem;">Sistema de Tamaños</h2>
-                <p class="text-2" style="margin-bottom: 2rem;">Tokens de tamaños para iconos, imágenes y elementos específicos.</p>
-                
-                <div style="margin-bottom: 3rem;">
-                    <h3 style="margin-bottom: 1rem;">Icon Sizes</h3>
-                    <div class="token-grid">
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 16px; height: 16px; background: var(--bg-accent); border-radius: 4px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--size-icon-sm</h4>
-                                <div class="token-value">16px</div>
-                                <p class="token-desc">Iconos pequeños en botones</p>
-                            </div>
+            <div style="margin-bottom: 3rem;">
+                <h3>Glassmorphism Tokens</h3>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--glass-light); backdrop-filter: var(--glass-blur); border: 1px solid var(--border-secondary); border-radius: 8px; margin-bottom: 1rem; position: relative;">
+                            <div style="position: absolute; inset: 0; background: var(--bg-2); opacity: 0.3; border-radius: 7px;"></div>
                         </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 24px; height: 24px; background: var(--bg-accent); border-radius: 4px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--size-icon</h4>
-                                <div class="token-value">24px</div>
-                                <p class="token-desc">Iconos estándar</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 40px; height: 40px; background: var(--bg-accent); border-radius: 4px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--size-icon-lg</h4>
-                                <div class="token-value">40px</div>
-                                <p class="token-desc">Logo y iconos grandes</p>
-                            </div>
-                        </div>
+                        <h4>--glass-light</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">Gradiente con opacidad - Fondo glassmorphism del nav</p>
                     </div>
-                </div>
-
-                <div style="margin-bottom: 3rem;">
-                    <h3 style="margin-bottom: 1rem;">Profile Sizes</h3>
-                    <div class="token-grid">
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 60px; height: 60px; background: var(--bg-accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 10px;">120px</div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--size-profile-sm</h4>
-                                <div class="token-value">120px</div>
-                                <p class="token-desc">Imagen de perfil móvil</p>
-                            </div>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-secondary); border-radius: 8px; position: relative; overflow: hidden; margin-bottom: 1rem;">
+                            <div style="position: absolute; inset: 0; backdrop-filter: var(--glass-blur); background: var(--glass-light);"></div>
                         </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 80px; height: 80px; background: var(--bg-accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 10px;">150px</div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--size-profile</h4>
-                                <div class="token-value">150px</div>
-                                <p class="token-desc">Imagen de perfil desktop</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="margin-bottom: 3rem;">
-                    <h3 style="margin-bottom: 1rem;">Layout Sizes</h3>
-                    <div class="token-grid">
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 100px; height: 40px; background: var(--bg-accent); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 8px;">200px</div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--size-project-img</h4>
-                                <div class="token-value">200px</div>
-                                <p class="token-desc">Altura imágenes de proyecto</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 120px; height: 30px; background: var(--bg-accent); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 8px;">400px</div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--size-sidebar-width</h4>
-                                <div class="token-value">400px</div>
-                                <p class="token-desc">Ancho del sidebar</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 140px; height: 30px; background: var(--bg-accent); border-radius: 4px; display: flex; align-items: center; justify-content: center; color: white; font-size: 8px;">1200px</div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--size-container-max</h4>
-                                <div class="token-value">1200px</div>
-                                <p class="token-desc">Ancho máximo del container</p>
-                            </div>
-                        </div>
+                        <h4>--glass-blur</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">blur(15px) - Efecto de desenfoque del nav</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Radius Tab -->
-            <div id="radius" class="tab-content">
-                <h2 style="margin-bottom: 2rem;">Sistema de Border Radius</h2>
-                <p class="text-2" style="margin-bottom: 2rem;">Tokens para esquinas redondeadas consistentes.</p>
-                
-                <div class="token-grid">
-                    <div class="token-card">
-                        <div class="token-visual">
-                            <div style="width: 60px; height: 60px; background: var(--bg-accent); border-radius: 2px;"></div>
-                        </div>
-                        <div class="token-info">
-                            <h4>--radius-sm</h4>
-                            <div class="token-value">2px</div>
-                            <p class="token-desc">Bordes sutiles, hamburger</p>
-                        </div>
+            <div style="margin-bottom: 3rem;">
+                <h3>Button & Component Tokens</h3>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--border-tertiary-btn); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--border-tertiary-btn</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">Color de borde para botón terciario default</p>
                     </div>
-                    <div class="token-card">
-                        <div class="token-visual">
-                            <div style="width: 60px; height: 60px; background: var(--bg-accent); border-radius: 8px;"></div>
-                        </div>
-                        <div class="token-info">
-                            <h4>--radius</h4>
-                            <div class="token-value">8px</div>
-                            <p class="token-desc">Botones y elementos estándar</p>
-                        </div>
-                    </div>
-                    <div class="token-card">
-                        <div class="token-visual">
-                            <div style="width: 60px; height: 60px; background: var(--bg-accent); border-radius: 12px;"></div>
-                        </div>
-                        <div class="token-info">
-                            <h4>--radius-md</h4>
-                            <div class="token-value">12px</div>
-                            <p class="token-desc">Cards y elementos destacados</p>
-                        </div>
-                    </div>
-                    <div class="token-card">
-                        <div class="token-visual">
-                            <div style="width: 60px; height: 60px; background: var(--bg-accent); border-radius: 16px;"></div>
-                        </div>
-                        <div class="token-info">
-                            <h4>--radius-lg</h4>
-                            <div class="token-value">16px</div>
-                            <p class="token-desc">Elementos grandes</p>
-                        </div>
-                    </div>
-                    <div class="token-card">
-                        <div class="token-visual">
-                            <div style="width: 60px; height: 60px; background: var(--bg-accent); border-radius: 50%;"></div>
-                        </div>
-                        <div class="token-info">
-                            <h4>--radius-full</h4>
-                            <div class="token-value">9999px</div>
-                            <p class="token-desc">Círculos perfectos</p>
-                        </div>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--border-tertiary-btn-hover); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--border-tertiary-btn-hover</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">Color de borde para botón terciario hover</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Typography Tab -->
-            <div id="typography" class="tab-content">
-                <h2 style="margin-bottom: 2rem;">Sistema Tipográfico</h2>
-                
-                <div style="margin-bottom: 3rem;">
-                    <h3 style="margin-bottom: 1rem;">Font Size Tokens</h3>
-                    <div class="token-grid">
-                        <div class="token-card">
-                            <div class="token-visual" style="background: var(--bg-2); display: flex; align-items: center; justify-content: center;">
-                                <span style="font-size: 11px; color: var(--text-1);">Texto XS</span>
-                            </div>
-                            <div class="token-info">
-                                <h4>--text-xs</h4>
-                                <div class="token-value">11px</div>
-                                <p class="token-desc">Tags, labels pequeños</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual" style="background: var(--bg-2); display: flex; align-items: center; justify-content: center;">
-                                <span style="font-size: 12px; color: var(--text-1);">Texto SM</span>
-                            </div>
-                            <div class="token-info">
-                                <h4>--text-sm</h4>
-                                <div class="token-value">12px</div>
-                                <p class="token-desc">Tooltips, captions</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual" style="background: var(--bg-2); display: flex; align-items: center; justify-content: center;">
-                                <span style="font-size: 14px; color: var(--text-1);">Texto Base</span>
-                            </div>
-                            <div class="token-info">
-                                <h4>--text-base</h4>
-                                <div class="token-value">14px</div>
-                                <p class="token-desc">Texto estándar, botones</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual" style="background: var(--bg-2); display: flex; align-items: center; justify-content: center;">
-                                <span style="font-size: 18px; color: var(--text-1);">Texto LG</span>
-                            </div>
-                            <div class="token-info">
-                                <h4>--text-lg</h4>
-                                <div class="token-value">18px</div>
-                                <p class="token-desc">Títulos de proyectos</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual" style="background: var(--bg-2); display: flex; align-items: center; justify-content: center;">
-                                <span style="font-size: 24px; color: var(--text-1);">Texto XL</span>
-                            </div>
-                            <div class="token-info">
-                                <h4>--text-xl</h4>
-                                <div class="token-value">24px</div>
-                                <p class="token-desc">Títulos de sección</p>
-                            </div>
-                        </div>
+            <div style="margin-bottom: 3rem;">
+                <h3>Legend Tokens 🤖⚔️</h3>
+                <p style="font-size: 0.875rem; color: var(--text-2); margin-bottom: 1.5rem;">Los colores más épicos del design system, inspirados en las leyendas</p>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--spawn); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--spawn</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#252525 - Antihéroe de las sombras, marca principal</p>
                     </div>
-                </div>
-
-                <div style="margin-bottom: 3rem;">
-                    <h3 style="margin-bottom: 1rem;">Semantic Typography</h3>
-                    <div class="token-grid">
-                    <div class="token-card">
-                        <h1>Heading 1</h1>
-                        <div class="token-value">2.5rem (40px) - font-weight: 800</div>
-                        <p class="token-desc">Títulos principales, nombres</p>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--saiyajin); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--saiyajin</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#FF9800 - Poder dorado, advertencias</p>
                     </div>
-                    <div class="token-card">
-                        <h2>Heading 2</h2>
-                        <div class="token-value">2rem (32px) - font-weight: 700</div>
-                        <p class="token-desc">Secciones principales</p>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--vegeta); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--vegeta</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#4285F4 - Orgullo del Príncipe, enlaces</p>
                     </div>
-                    <div class="token-card">
-                        <h3>Heading 3</h3>
-                        <div class="token-value">1.5rem (24px) - font-weight: 600</div>
-                        <p class="token-desc">Subtítulos</p>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--seiya); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--seiya</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#EA4335 - Meteoros de Pegaso, errores</p>
                     </div>
-                    <div class="token-card">
-                        <p>Body text</p>
-                        <div class="token-value">1rem (16px) - font-weight: 400</div>
-                        <p class="token-desc">Contenido principal</p>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--piccolo); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--piccolo</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#34A853 - Guerrero Namek, éxito</p>
                     </div>
-                    <div class="token-card">
-                        <p class="lead">Lead paragraph</p>
-                        <div class="token-value">1.25rem (20px) - font-weight: 300</div>
-                        <p class="token-desc">Introducciones importantes</p>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--samurai-x); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--samurai-x</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#FF6B35 - Elementos especiales</p>
                     </div>
-                    <div class="token-card">
-                        <p class="text-sm">Small text</p>
-                        <div class="token-value">0.875rem (14px) - font-weight: 400</div>
-                        <p class="token-desc">Información secundaria</p>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--beerus); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--beerus</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#9C27B0 - Dios de la Destrucción</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Borders Tab -->
-            <div id="borders" class="tab-content">
-                <h2 style="margin-bottom: 2rem;">Sistema de Bordes</h2>
-                
-                <div style="margin-bottom: 3rem;">
-                    <h3 style="margin-bottom: 1rem;">Border Width Tokens</h3>
-                    <div class="token-grid">
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 60px; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--border-width</h4>
-                                <div class="token-value">1px</div>
-                                <p class="token-desc">Bordes estándar</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 60px; height: 60px; background: var(--bg-2); border: 2px solid var(--border-primary); border-radius: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--border-width-md</h4>
-                                <div class="token-value">2px</div>
-                                <p class="token-desc">Bordes enfatizados, typewriter</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 60px; height: 60px; background: var(--bg-2); border: 3px solid var(--border-primary); border-radius: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--border-width-lg</h4>
-                                <div class="token-value">3px</div>
-                                <p class="token-desc">Bordes destacados, profile image</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div>
-                    <h3 style="margin-bottom: 1rem;">Border Colors</h3>
-                    <div class="token-grid">
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 40px; height: 40px; background: var(--bg-2); border: 4px solid var(--border-primary); border-radius: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--border-primary</h4>
-                                <div class="token-value">#dadce0 / #5f6368</div>
-                                <p class="token-desc">Bordes principales, inputs</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 40px; height: 40px; background: var(--bg-2); border: 4px solid var(--border-secondary); border-radius: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--border-secondary</h4>
-                                <div class="token-value">#e8eaed / #3c4043</div>
-                                <p class="token-desc">Nav, cards, separadores</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 40px; height: 40px; background: var(--bg-2); border: 4px solid var(--border-tertiary); border-radius: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--border-tertiary</h4>
-                                <div class="token-value">#f1f3f4 / #2d2e30</div>
-                                <p class="token-desc">Bordes sutiles, líneas</p>
-                            </div>
-                        </div>
-                        <div class="token-card">
-                            <div class="token-visual">
-                                <div style="width: 40px; height: 40px; background: var(--bg-2); border: 4px solid var(--border-focus); border-radius: 8px;"></div>
-                            </div>
-                            <div class="token-info">
-                                <h4>--border-focus</h4>
-                                <div class="token-value">#4285F4 / #8AB4F8</div>
-                                <p class="token-desc">Estados de foco, activos</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Components Tab -->
-            <div id="components" class="tab-content">
-                <h2 style="margin-bottom: 2rem;">Componentes</h2>
-                
-                <div class="component-showcase">
-                    <div class="component-card">
-                        <h4>Jerarquía de Botones</h4>
-                        <div class="button-demo">
-                            <button class="btn-primary">Primario</button>
-                            <button class="btn-secondary">Secundario</button>
-                            <button class="btn-tertiary">Terciario</button>
-                        </div>
-                        <p class="text-sm text-2">Botón primario para acciones principales, secundario para soporte, terciario para acciones sutiles.</p>
+            <div style="margin-bottom: 3rem;">
+                <h3>Status Light Tokens</h3>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--success-light); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--success-light</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#e8f5e8 - Fondo claro para estados de éxito</p>
                     </div>
-                    
-                    <div class="component-card">
-                        <h4>Theme Toggle</h4>
-                        <div class="component-demo">
-                            <button class="theme-toggle" id="demo-theme-toggle">
-                                <i data-feather="sun" id="demo-theme-icon"></i>
-                            </button>
-                        </div>
-                        <p class="text-sm text-2">Botón de cambio de tema con rotación, shimmer y tooltip. Hover para ver efectos.</p>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--error-light); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--error-light</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#fce8e6 - Fondo claro para estados de error</p>
                     </div>
-                    
-                    <div class="component-card">
-                        <h4>Project Cards</h4>
-                        <div class="project-card card-elevation" style="max-width: 250px;">
-                            <div class="project-content p-6">
-                                <h5 class="text-1" style="margin-bottom: 0.5rem;">Ejemplo Card</h5>
-                                <p class="text-2 text-sm" style="margin-bottom: 0.75rem;">Este es un ejemplo de card de proyecto.</p>
-                                <div style="display: flex; gap: 0.5rem;">
-                                    <span class="project-tag bg-2 text-2 px-3 py-1 rounded-full text-xs">Tag</span>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--warning-light); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--warning-light</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#fff3e0 - Fondo claro para advertencias</p>
                     </div>
-                    
-                    <div class="component-card">
-                        <h4>Tokens de Estado</h4>
-                        <div class="button-demo">
-                            <button class="btn-success btn-sm">Éxito</button>
-                            <button class="btn-error btn-sm">Error</button>
-                            <button class="btn-warning btn-sm">Advertencia</button>
-                            <button class="btn-info btn-sm">Info</button>
-                        </div>
-                        <p class="text-sm text-2">Botones para estados específicos del sistema.</p>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--info-light); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                        <h4>--info-light</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">#e3f2fd - Fondo claro para información</p>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
 
-    <!-- Footer -->
-    <footer class="text-center bg-footer" style="padding: 2.5rem 1.25rem;">
-        <p class="text-sm text-static">🔥 Design System · Forjado con pasión y mucho café ☕</p>
-    </footer>
+        <!-- Typography Tab -->
+        <div id="typography" class="tab-content">
+            <h2 style="margin-bottom: 2rem;">Sistema Tipográfico</h2>
+            
+            <div style="margin-bottom: 3rem;">
+                <h3>Heading Tokens</h3>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                            <span style="font-size: 40px; color: var(--text-1); font-weight: 800;">H1</span>
+                        </div>
+                        <h4>--font-h1</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">40px - Títulos principales, nombre personal</p>
+                    </div>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                            <span style="font-size: 32px; color: var(--text-1); font-weight: 700;">H2</span>
+                        </div>
+                        <h4>--font-h2</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">32px - Secciones principales del portfolio</p>
+                    </div>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                            <span style="font-size: 24px; color: var(--text-1); font-weight: 600;">H3</span>
+                        </div>
+                        <h4>--font-h3</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">24px - Títulos de sección, headings importantes</p>
+                    </div>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                            <span style="font-size: 18px; color: var(--text-1); font-weight: 600;">H4</span>
+                        </div>
+                        <h4>--font-h4</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">18px - Subtítulos, títulos de proyectos</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 3rem;">
+                <h3>Paragraph Tokens</h3>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                            <span style="font-size: 16px; color: var(--text-1); font-weight: 400;">P1</span>
+                        </div>
+                        <h4>--font-p1</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">16px - Párrafos principales, contenido importante</p>
+                    </div>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                            <span style="font-size: 14px; color: var(--text-1); font-weight: 400;">P2</span>
+                        </div>
+                        <h4>--font-p2</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">14px - Texto estándar, contenido de botones</p>
+                    </div>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                            <span style="font-size: 12px; color: var(--text-1); font-weight: 400;">P3</span>
+                        </div>
+                        <h4>--font-p3</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">12px - Captions, tooltips, texto auxiliar</p>
+                    </div>
+                    <div class="demo-card">
+                        <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                            <span style="font-size: 11px; color: var(--text-1); font-weight: 400;">P4</span>
+                        </div>
+                        <h4>--font-p4</h4>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">11px - Tags pequeños, labels, metadatos</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Spacing Tab -->
+        <div id="spacing" class="tab-content">
+            <h2>Sistema de Espaciado</h2>
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 4px; height: 4px; background: var(--bg-accent);"></div>
+                    </div>
+                    <h4>--space-1</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">0.25rem (4px) - Espaciado mínimo, padding de hamburger, margin de elementos pequeños</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 8px; height: 8px; background: var(--bg-accent);"></div>
+                    </div>
+                    <h4>--space-2</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">0.5rem (8px) - Márgenes pequeños, separación de iconos, spacing entre elementos cercanos</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 12px; height: 12px; background: var(--bg-accent);"></div>
+                    </div>
+                    <h4>--space-3</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">0.75rem (12px) - Padding compacto de botones, márgenes medianos</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 16px; height: 16px; background: var(--bg-accent);"></div>
+                    </div>
+                    <h4>--space-4</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">1rem (16px) - Espaciado estándar, gap entre elementos, padding moderado</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 20px; height: 20px; background: var(--bg-accent);"></div>
+                    </div>
+                    <h4>--space-5</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">1.25rem (20px) - Padding estándar, márgenes de secciones, spacing general</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 24px; height: 24px; background: var(--bg-accent);"></div>
+                    </div>
+                    <h4>--space-6</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">1.5rem (24px) - Padding de botones horizontales, sticky top position</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 30px; height: 30px; background: var(--bg-accent);"></div>
+                    </div>
+                    <h4>--space-7</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">1.75rem (30px) - Gap entre elementos grandes, márgenes de secciones importantes</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 32px; height: 32px; background: var(--bg-accent);"></div>
+                    </div>
+                    <h4>--space-8</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">2rem (32px) - Márgenes grandes, padding de secciones</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 36px; height: 36px; background: var(--bg-accent);"></div>
+                    </div>
+                    <h4>--space-9</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">2.25rem (36px) - Espaciado intermedio grande</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 40px; height: 40px; background: var(--bg-accent);"></div>
+                    </div>
+                    <h4>--space-10</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">2.5rem (40px) - Padding de sidebar, gap entre secciones principales</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 48px; height: 48px; background: var(--bg-accent);"></div>
+                    </div>
+                    <h4>--space-11</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">3rem (48px) - Tooltip positioning, espaciado medio-grande</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 60px; height: 60px; background: var(--bg-accent);"></div>
+                    </div>
+                    <h4>--space-12</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">3.75rem (60px) - Espaciado intermedio grande</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 64px; height: 64px; background: var(--bg-accent);"></div>
+                    </div>
+                    <h4>--space-13</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">4rem (64px) - Padding de secciones grandes</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 80px; height: 50px; background: var(--bg-accent);"></div>
+                    </div>
+                    <h4>--space-14</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">5rem (80px) - Espaciado extra grande, separaciones principales</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 96px; height: 50px; background: var(--bg-accent);"></div>
+                    </div>
+                    <h4>--space-15</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">6rem (96px) - Espaciado muy grande</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 120px; height: 50px; background: var(--bg-accent);"></div>
+                    </div>
+                    <h4>--space-16</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">7.5rem (120px) - Espaciado máximo, separaciones enormes</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 160px; height: 50px; background: var(--bg-accent);"></div>
+                    </div>
+                    <h4>--space-17</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">10rem (160px) - Espaciado extremo</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Radius Tab -->
+        <div id="radius" class="tab-content">
+            <h2>Sistema de Border Radius</h2>
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 40px; height: 40px; background: var(--bg-accent); border-radius: 2px;"></div>
+                    </div>
+                    <h4>--radius-sm</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">2px - Bordes sutiles, elementos pequeños como hamburger menu</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 40px; height: 40px; background: var(--bg-accent); border-radius: 8px;"></div>
+                    </div>
+                    <h4>--radius</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">8px - Botones estándar, elementos regulares, tabs</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 40px; height: 40px; background: var(--bg-accent); border-radius: 12px;"></div>
+                    </div>
+                    <h4>--radius-md</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">12px - Cards destacadas, project cards, elementos importantes</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 40px; height: 40px; background: var(--bg-accent); border-radius: 16px;"></div>
+                    </div>
+                    <h4>--radius-lg</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">16px - Elementos grandes, containers principales</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-2); border: 1px solid var(--border-primary); margin-bottom: 1rem; display: flex; align-items: center; justify-content: center;">
+                        <div style="width: 40px; height: 40px; background: var(--bg-accent); border-radius: 50%;"></div>
+                    </div>
+                    <h4>--radius-full</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">9999px - Círculos perfectos, imagen de perfil, theme toggle</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Elevation Tab -->
+        <div id="elevation" class="tab-content">
+            <h2>Sistema de Elevación</h2>
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-1); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; box-shadow: var(--shadow-sm);"></div>
+                    <h4>--shadow-sm</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">Sombra sutil - Project cards default</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-1); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; box-shadow: var(--shadow-base);"></div>
+                    <h4>--shadow-base</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">Sombra estándar - Cards y elementos elevados</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-1); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; box-shadow: var(--shadow-md);"></div>
+                    <h4>--shadow-md</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">Sombra media - Hover states, elementos destacados</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-1); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem; box-shadow: var(--shadow-lg);"></div>
+                    <h4>--shadow-lg</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">Sombra grande - Modales, elementos flotantes</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Borders Tab -->
+        <div id="borders" class="tab-content">
+            <h2>Sistema de Bordes</h2>
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-1); border: 1px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                    <h4>--border-width</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">1px - Bordes estándar, botones, cards</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-1); border: 2px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                    <h4>--border-width-md</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">2px - Bordes enfatizados, typewriter cursor</p>
+                </div>
+                <div class="demo-card">
+                    <div style="width: 100%; height: 60px; background: var(--bg-1); border: 3px solid var(--border-primary); border-radius: 8px; margin-bottom: 1rem;"></div>
+                    <h4>--border-width-lg</h4>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0.5rem 0 0 0;">3px - Bordes destacados, imagen de perfil</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Components Tab -->
+        <div id="components" class="tab-content">
+            <h2 style="margin-bottom: 2rem;">Componentes</h2>
+            
+            <div style="margin-bottom: 3rem;">
+                <h3>Button Types</h3>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <h4>Jerarquía de Botones</h4>
+                        <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;">
+                            <button class="btn-primary">Primario</button>
+                            <button class="btn-secondary">Secundario</button>
+                            <button class="btn-tertiary">Terciario</button>
+                        </div>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0;">Botón primario para acciones principales, secundario para soporte, terciario para acciones sutiles</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 3rem;">
+                <h3>Button Sizes</h3>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <h4>Small (sm)</h4>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start; margin-bottom: 1rem;">
+                            <button class="btn-primary btn-sm">
+                                <i data-feather="download" class="icon"></i>
+                                Small Primary
+                            </button>
+                            <button class="btn-secondary btn-sm">
+                                <i data-feather="linkedin" class="icon"></i>
+                                Small Secondary
+                            </button>
+                            <button class="btn-tertiary btn-sm">
+                                <i data-feather="mail" class="icon"></i>
+                                Small Tertiary
+                            </button>
+                        </div>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0;">Padding: 8px 16px | Font: 12px | Icon: 16px</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4>Medium (md) - Default</h4>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start; margin-bottom: 1rem;">
+                            <button class="btn-primary btn-md">
+                                <i data-feather="download" class="icon"></i>
+                                Medium Primary
+                            </button>
+                            <button class="btn-secondary btn-md">
+                                <i data-feather="linkedin" class="icon"></i>
+                                Medium Secondary
+                            </button>
+                            <button class="btn-tertiary btn-md">
+                                <i data-feather="mail" class="icon"></i>
+                                Medium Tertiary
+                            </button>
+                        </div>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0;">Padding: 12px 24px | Font: 14px | Icon: 20px</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4>Large (lg)</h4>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem; align-items: flex-start; margin-bottom: 1rem;">
+                            <button class="btn-primary btn-lg">
+                                <i data-feather="download" class="icon"></i>
+                                Large Primary
+                            </button>
+                            <button class="btn-secondary btn-lg">
+                                <i data-feather="linkedin" class="icon"></i>
+                                Large Secondary
+                            </button>
+                            <button class="btn-tertiary btn-lg">
+                                <i data-feather="mail" class="icon"></i>
+                                Large Tertiary
+                            </button>
+                        </div>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0;">Padding: 16px 32px | Font: 16px | Icon: 24px</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 3rem;">
+                <h3>Icon-Only Buttons</h3>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <h4>Icon Small (sm)</h4>
+                        <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 1rem;">
+                            <button class="btn-primary btn-icon btn-sm">
+                                <i data-feather="heart" class="icon"></i>
+                                <span>Like</span>
+                            </button>
+                            <button class="btn-secondary btn-icon btn-sm">
+                                <i data-feather="share-2" class="icon"></i>
+                                <span>Share</span>
+                            </button>
+                            <button class="btn-tertiary btn-icon btn-sm">
+                                <i data-feather="bookmark" class="icon"></i>
+                                <span>Save</span>
+                            </button>
+                        </div>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0;">Padding: 8px | Icon: 16px</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4>Icon Medium (md)</h4>
+                        <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 1rem;">
+                            <button class="btn-primary btn-icon btn-md">
+                                <i data-feather="heart" class="icon"></i>
+                                <span>Like</span>
+                            </button>
+                            <button class="btn-secondary btn-icon btn-md">
+                                <i data-feather="share-2" class="icon"></i>
+                                <span>Share</span>
+                            </button>
+                            <button class="btn-tertiary btn-icon btn-md">
+                                <i data-feather="bookmark" class="icon"></i>
+                                <span>Save</span>
+                            </button>
+                        </div>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0;">Padding: 12px | Icon: 20px</p>
+                    </div>
+                    <div class="demo-card">
+                        <h4>Icon Large (lg)</h4>
+                        <div style="display: flex; gap: 0.5rem; align-items: center; margin-bottom: 1rem;">
+                            <button class="btn-primary btn-icon btn-lg">
+                                <i data-feather="heart" class="icon"></i>
+                                <span>Like</span>
+                            </button>
+                            <button class="btn-secondary btn-icon btn-lg">
+                                <i data-feather="share-2" class="icon"></i>
+                                <span>Share</span>
+                            </button>
+                            <button class="btn-tertiary btn-icon btn-lg">
+                                <i data-feather="bookmark" class="icon"></i>
+                                <span>Save</span>
+                            </button>
+                        </div>
+                        <p style="font-size: 0.75rem; color: var(--text-2); margin: 0;">Padding: 16px | Icon: 24px</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 3rem;">
+                <h3>Button Usage Guidelines</h3>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <h4>Size Guidelines</h4>
+                        <ul style="font-size: 0.875rem; color: var(--text-2); margin: 0; padding-left: 1rem;">
+                            <li><strong>Small (sm):</strong> Acciones secundarias, toolbars, cards</li>
+                            <li><strong>Medium (md):</strong> Acciones principales, formularios (default)</li>
+                            <li><strong>Large (lg):</strong> CTAs principales, hero sections</li>
+                            <li><strong>Icon-only:</strong> Acciones rápidas, toolbars, espacios reducidos</li>
+                        </ul>
+                    </div>
+                    <div class="demo-card">
+                        <h4>Combinaciones</h4>
+                        <div style="margin-bottom: 1rem;">
+                            <code style="background: var(--bg-3); padding: 0.25rem 0.5rem; border-radius: var(--radius-sm); font-size: 0.75rem;">btn-primary btn-lg</code><br><br>
+                            <code style="background: var(--bg-3); padding: 0.25rem 0.5rem; border-radius: var(--radius-sm); font-size: 0.75rem;">btn-secondary btn-sm</code><br><br>
+                            <code style="background: var(--bg-3); padding: 0.25rem 0.5rem; border-radius: var(--radius-sm); font-size: 0.75rem;">btn-tertiary btn-icon btn-md</code>
+                        </div>
+                        <p style="font-size: 0.875rem; color: var(--text-2); margin: 0;">Combina tipos, tamaños e icon-only según el contexto</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-grid">
+                <div class="demo-card">
+                    <h4>Theme Toggle</h4>
+                    <div style="margin-bottom: 1rem;">
+                        <button class="theme-toggle">
+                            <i data-feather="sun"></i>
+                        </button>
+                    </div>
+                    <p style="font-size: 0.75rem; color: var(--text-2); margin: 0;">Toggle de tema con efectos de rotación y shimmer</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
     <script>
-        // Tab functionality
         function showTab(tabName) {
-            // Hide all tab contents
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.remove('active');
-            });
+            // Hide all
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
             
-            // Remove active class from all tabs
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Show selected tab content
-            const targetContent = document.getElementById(tabName);
-            if (targetContent) {
-                targetContent.classList.add('active');
-            }
-            
-            // Add active class to clicked tab
+            // Show selected
+            document.getElementById(tabName).classList.add('active');
             event.target.classList.add('active');
         }
+
+        // Initialize feather icons
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof feather !== 'undefined') {
+                feather.replace();
+            }
+        });
     </script>
 </body>
 </html>
