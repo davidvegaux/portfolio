@@ -1,6 +1,6 @@
-# 🎨 David Vega - UX/UI Designer Portfolio
+# 🎨 David Vega - UX/UI Designer - Portfolio
 
-> **Professional portfolio showcasing UX/UI design expertise with enterprise-level code quality and modern design system implementation.**
+> **Professional portfolio showcasing comprehensive UX/UI design expertise with enterprise-level code quality, modern design system implementation, and career-focused presentation for design professionals seeking to advance in the industry.**
 
 ## 👨‍💻 **About This Project**
 
