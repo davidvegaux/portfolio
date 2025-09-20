@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David Vega - UX/UI Designer [EXPERIMENTAL]</title>
+    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="crazy-body">
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-trail"></div>
+
+    <!-- Particles Background -->
+    <div class="particles-bg">
+        <div class="particle-item"></div>
+        <div class="particle-item"></div>
+        <div class="particle-item"></div>
+        <div class="particle-item"></div>
+        <div class="particle-item"></div>
+        <div class="particle-item"></div>
+        <div class="particle-item"></div>
+        <div class="particle-item"></div>
+        <div class="particle-item"></div>
+        <div class="particle-item"></div>
+    </div>
+
+    <!-- Experimental Navigation -->
+    <nav class="nav-crazy">
+        <div class="container">
+            <div class="nav-crazy-content">
+                <div class="hamburger-crazy" onclick="toggleCrazyMenu()">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </div>
+                <div class="nav-crazy-left">
+                    <div class="logo-crazy-container">
+                        <div class="logo-crazy">
+                            <span class="logo-letter">D</span>
+                            <span class="logo-letter">V</span>
+                        </div>
+                    </div>
+                    <ul class="nav-crazy-links" id="nav-crazy-links">
+                        <li><a href="#proyectos" class="nav-crazy-link" data-text="Proyectos">Proyectos</a></li>
+                        <li><a href="#experiencia" class="nav-crazy-link" data-text="Experiencia">Experiencia</a></li>
+                        <li><a href="#contacto" class="nav-crazy-link" data-text="Contacto">Contacto</a></li>
+                        <li><a href="design-system.html" class="nav-crazy-link" data-text="System">Design System</a></li>
+                    </ul>
+                </div>
+                <button class="theme-crazy-toggle" onclick="toggleCrazyTheme()">
+                    <div class="theme-crazy-icon">
+                        <i id="theme-crazy-icon" data-feather="moon"></i>
+                    </div>
+                    <div class="theme-explosion"></div>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-crazy">
+        <!-- Experimental Sidebar -->
+        <aside class="sidebar-crazy">
+            <div class="sidebar-crazy-content">
+                <!-- Morphing Profile -->
+                <div class="profile-crazy">
+                    <div class="profile-image-container">
+                        <img src="Images/David-Vega-UX.jpg" alt="David Vega" class="profile-crazy-img">
+                        <div class="profile-glow"></div>
+                        <div class="profile-ring"></div>
+                    </div>
+                    <div class="profile-text">
+                        <h1 class="name-crazy">
+                            <span class="name-letter" data-letter="D">D</span>
+                            <span class="name-letter" data-letter="a">a</span>
+                            <span class="name-letter" data-letter="v">v</span>
+                            <span class="name-letter" data-letter="i">i</span>
+                            <span class="name-letter" data-letter="d">d</span>
+                            <span class="name-space"> </span>
+                            <span class="name-letter" data-letter="V">V</span>
+                            <span class="name-letter" data-letter="e">e</span>
+                            <span class="name-letter" data-letter="g">g</span>
+                            <span class="name-letter" data-letter="a">a</span>
+                        </h1>
+                        <div class="title-crazy">
+                            <span class="title-word">Diseñador</span>
+                            <span class="title-word">UX/UI</span>
+                            <span class="title-word">Senior</span>
+                        </div>
+                        <div class="location-crazy">
+                            <i data-feather="map-pin" class="location-icon"></i>
+                            <span class="location-text">Bogotá, Colombia</span>
+                            <div class="location-pulse"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Glitch Summary -->
+                <div class="summary-crazy">
+                    <p class="summary-text">
+                        <span class="summary-highlight">8+ años</span> creando productos digitales que la gente 
+                        <span class="summary-highlight">realmente quiere usar</span>. Me especializo en transformar 
+                        <span class="summary-highlight">ideas complejas</span> en experiencias simples e intuitivas que 
+                        <span class="summary-highlight">generan resultados reales</span> 🚀
+                    </p>
+                </div>
+
+                <!-- Morphing Contact Buttons -->
+                <div class="contact-crazy">
+                    <a href="https://www.linkedin.com/in/david-vega-ux/" target="_blank" class="btn-crazy linkedin">
+                        <div class="btn-crazy-content">
+                            <i data-feather="linkedin" class="btn-crazy-icon"></i>
+                            <span class="btn-crazy-text">LinkedIn</span>
+                        </div>
+                        <div class="btn-crazy-bg"></div>
+                        <div class="btn-crazy-particles"></div>
+                    </a>
+                    <a href="mailto:davidvegaux@gmail.com" class="btn-crazy email">
+                        <div class="btn-crazy-content">
+                            <i data-feather="mail" class="btn-crazy-icon"></i>
+                            <span class="btn-crazy-text">Email</span>
+                        </div>
+                        <div class="btn-crazy-bg"></div>
+                        <div class="btn-crazy-particles"></div>
+                    </a>
+                    <a href="https://wa.me/573166388667?text=Hola%20David,%20vi%20tu%20portafolio%20y%20me%20voló%20la%20cabeza!%20🚀" class="btn-crazy whatsapp">
+                        <div class="btn-crazy-content">
+                            <i data-feather="message-circle" class="btn-crazy-icon"></i>
+                            <span class="btn-crazy-text">WhatsApp</span>
+                        </div>
+                        <div class="btn-crazy-bg"></div>
+                        <div class="btn-crazy-particles"></div>
+                    </a>
+                    <a href="#" class="btn-crazy download" onclick="downloadCV()">
+                        <div class="btn-crazy-content">
+                            <i data-feather="download" class="btn-crazy-icon"></i>
+                            <span class="btn-crazy-text">Descarga CV</span>
+                        </div>
+                        <div class="btn-crazy-bg"></div>
+                        <div class="btn-crazy-particles"></div>
+                    </a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Experimental Content -->
+        <div class="content-crazy">
+            <!-- Projects Section with 3D Effects -->
+            <section id="proyectos" class="section-crazy projects-crazy py-10 px-10">
+                <div class="projects-header">
+                    <h2 class="projects-title-crazy mb-8">
+                        Proyectos destacados en: 
+                        <span class="typewriter-crazy"></span>
+                        <span class="typewriter-cursor">|</span>
+                    </h2>
+                    <div class="projects-subtitle">
+                        <span class="subtitle-line">Transformando ideas en</span>
+                        <span class="subtitle-line">experiencias extraordinarias</span>
+                    </div>
+                </div>
+                
+                <div class="project-grid-crazy">
+                    <div class="project-card-crazy" data-tilt>
+                        <div class="card-crazy-inner">
+                            <div class="card-crazy-front">
+                                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=200&fit=crop" alt="Template UBITS" class="project-crazy-image">
+                                <div class="project-crazy-content p-4">
+                                    <h3 class="project-crazy-title mb-2">Template UBITS</h3>
+                                    <div class="project-crazy-company text-2 mb-2">UBITS</div>
+                                    <p class="project-crazy-description mb-4">Plantilla definitiva para crear interfaces UBITS auténticas sin complicaciones técnicas.</p>
+                                    <div class="project-crazy-tags">
+                                        <span class="project-crazy-tag">Design system</span>
+                                        <span class="project-crazy-tag">Vibe coding</span>
+                                        <span class="project-crazy-tag">Cursor AI</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-crazy-back">
+                                <div class="card-back-content">
+                                    <h3>🚀 Revolucionario</h3>
+                                    <p>De 3 semanas a 20 segundos. Transformamos cómo UBITS prototipa.</p>
+                                    <div class="card-back-stats">
+                                        <div class="back-stat">
+                                            <span class="stat-number">20s</span>
+                                            <span class="stat-label">Prototipado</span>
+                                        </div>
+                                        <div class="back-stat">
+                                            <span class="stat-number">∞</span>
+                                            <span class="stat-label">Variaciones</span>
+                                        </div>
+                                    </div>
+                                    <a href="template-ubits-v1.html" class="btn-crazy-small">Ver Case Study</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-crazy-glow"></div>
+                    </div>
+
+                    <div class="project-card-crazy" data-tilt>
+                        <div class="card-crazy-inner">
+                            <div class="card-crazy-front">
+                                <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&h=200&fit=crop" alt="UBITS Shorts" class="project-crazy-image">
+                                <div class="project-crazy-content p-4">
+                                    <h3 class="project-crazy-title mb-2">UBITS Shorts - "TikTok educativo"</h3>
+                                    <div class="project-crazy-company text-2 mb-2">UBITS Hackathon 2025</div>
+                                    <p class="project-crazy-description mb-4">Plataforma tipo TikTok para educación que ganó segundo lugar en hackathon.</p>
+                                    <div class="project-crazy-tags">
+                                        <span class="project-crazy-tag">Mobile design</span>
+                                        <span class="project-crazy-tag">Vibe coding</span>
+                                        <span class="project-crazy-tag">Cursor AI</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-crazy-back">
+                                <div class="card-back-content">
+                                    <h3>🏆 Ganador</h3>
+                                    <p>Segundo lugar en hackathon con una idea disruptiva en educación.</p>
+                                    <div class="card-back-stats">
+                                        <div class="back-stat">
+                                            <span class="stat-number">2nd</span>
+                                            <span class="stat-label">Lugar</span>
+                                        </div>
+                                        <div class="back-stat">
+                                            <span class="stat-number">48h</span>
+                                            <span class="stat-label">Desarrollo</span>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="btn-crazy-small">Ver Proyecto</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-crazy-glow"></div>
+                    </div>
+
+                    <div class="project-card-crazy" data-tilt>
+                        <div class="card-crazy-inner">
+                            <div class="card-crazy-front">
+                                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&h=200&fit=crop" alt="UBITS LMS" class="project-crazy-image">
+                                <div class="project-crazy-content p-4">
+                                    <h3 class="project-crazy-title mb-2">Sistema LMS Propio</h3>
+                                    <div class="project-crazy-company text-2 mb-2">UBITS</div>
+                                    <p class="project-crazy-description mb-4">LMS completo que reemplazó Moodle, mejorando experiencia y escalabilidad.</p>
+                                    <div class="project-crazy-tags">
+                                        <span class="project-crazy-tag">UX Design</span>
+                                        <span class="project-crazy-tag">System Design</span>
+                                        <span class="project-crazy-tag">Accessibility</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-crazy-back">
+                                <div class="card-back-content">
+                                    <h3>⚡ Transformación</h3>
+                                    <p>Reemplazamos Moodle con una experiencia completamente nueva.</p>
+                                    <div class="card-back-stats">
+                                        <div class="back-stat">
+                                            <span class="stat-number">100%</span>
+                                            <span class="stat-label">Mejor UX</span>
+                                        </div>
+                                        <div class="back-stat">
+                                            <span class="stat-number">∞</span>
+                                            <span class="stat-label">Escalabilidad</span>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="btn-crazy-small">Ver Proyecto</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-crazy-glow"></div>
+                    </div>
+
+                    <div class="project-card-crazy" data-tilt>
+                        <div class="card-crazy-inner">
+                            <div class="card-crazy-front">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=200&fit=crop" alt="Aprende Institute" class="project-crazy-image">
+                                <div class="project-crazy-content p-4">
+                                    <h3 class="project-crazy-title mb-2">Transformación Aprende Institute</h3>
+                                    <div class="project-crazy-company text-2 mb-2">Aprende Institute</div>
+                                    <p class="project-crazy-description mb-4">Validación y expansión que superó 100K dólares mensuales al tercer mes.</p>
+                                    <div class="project-crazy-tags">
+                                        <span class="project-crazy-tag">Business validation</span>
+                                        <span class="project-crazy-tag">MVP</span>
+                                        <span class="project-crazy-tag">Leadership</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-crazy-back">
+                                <div class="card-back-content">
+                                    <h3>💰 Éxito Financiero</h3>
+                                    <p>De 0 a 100K dólares mensuales en tiempo récord.</p>
+                                    <div class="card-back-stats">
+                                        <div class="back-stat">
+                                            <span class="stat-number">100K</span>
+                                            <span class="stat-label">USD/mes</span>
+                                        </div>
+                                        <div class="back-stat">
+                                            <span class="stat-number">3</span>
+                                            <span class="stat-label">Meses</span>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="btn-crazy-small">Ver Proyecto</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-crazy-glow"></div>
+                    </div>
+                </div>
+
+                <!-- Floating Skills -->
+                <div class="floating-skills">
+                    <div class="skill-bubble" data-skill="User Research">🔍</div>
+                    <div class="skill-bubble" data-skill="Wireframing">📐</div>
+                    <div class="skill-bubble" data-skill="Design Systems">🎨</div>
+                    <div class="skill-bubble" data-skill="Vibe Coding">⚡</div>
+                    <div class="skill-bubble" data-skill="Prototyping">🚀</div>
+                    <div class="skill-bubble" data-skill="User Testing">👥</div>
+                </div>
+            </section>
+
+            <!-- Experimental Stats Section -->
+            <section class="stats-crazy py-16 px-10">
+                <div class="stats-crazy-container">
+                    <h2 class="stats-crazy-title">Impacto en números</h2>
+                    <div class="stats-crazy-grid">
+                        <div class="stat-crazy-item" data-target="8">
+                            <div class="stat-crazy-number">0</div>
+                            <div class="stat-crazy-label">Años de experiencia</div>
+                            <div class="stat-crazy-bar">
+                                <div class="stat-crazy-fill"></div>
+                            </div>
+                        </div>
+                        <div class="stat-crazy-item" data-target="100">
+                            <div class="stat-crazy-number">0</div>
+                            <div class="stat-crazy-label">Proyectos completados</div>
+                            <div class="stat-crazy-bar">
+                                <div class="stat-crazy-fill"></div>
+                            </div>
+                        </div>
+                        <div class="stat-crazy-item" data-target="50">
+                            <div class="stat-crazy-number">0</div>
+                            <div class="stat-crazy-label">Empresas impactadas</div>
+                            <div class="stat-crazy-bar">
+                                <div class="stat-crazy-fill"></div>
+                            </div>
+                        </div>
+                        <div class="stat-crazy-item" data-target="1000">
+                            <div class="stat-crazy-number">0</div>
+                            <div class="stat-crazy-label">Usuarios felices</div>
+                            <div class="stat-crazy-bar">
+                                <div class="stat-crazy-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress">
+        <div class="scroll-progress-bar"></div>
+    </div>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="loading-logo-container">
+                    <svg class="loading-svg-electric" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.86,20.03c-.38.03-.77.26-.98.41,0,.41-.01.71-.02.82-.04.57-.26,1.47-.86,2.31-.59.85-1.88,1.63-1.88,1.63,0,0,1.36-.42,3.06-.26,1.5.14,2.97,1.04,2.97,1.04,0,0,.26-.27.47-.41s.65-.37.65-.37v-5.65c-.64.63-1.33.81-1.69.8-.39-.01-1.17-.36-1.73-.32Z"/>
+                    <path fill="url(#fillGradient)" d="M13.4,17.87c-.2-.1-.37-.23-.5-.36,0,.77,0,1.65-.01,2.37.25-.2.62-.51.96-.59.42-.11.87.07,1.27.17.4.1.99.21,1.32.07.23-.09.63-.37.84-.52v-.96c-.21.05-.49.13-.88.26-1.53.52-2.41-.13-3-.44Z"/>
+                    <path fill="url(#fillGradient)" d="M14.38,14.3c-.99-.47-1.25-.1-1.38.06-.18.21-.1,1.27-.1,1.27,0,0,0,.44,0,1.07.09.1,1.06,1.16,2.21,1.19,1.13.03,1.7-.27,2.17-.28v-.02s-.28-.71-.78-1.34c-.49-.64-1.39-1.59-2.12-1.93Z"/>
+                    <path fill="url(#fillGradient)" d="M20,0C8.95,0,0,8.95,0,20s8.95,20,20,20,20-8.95,20-20S31.05,0,20,0ZM20.23,25.3s-1.71.2-3.21.91c-1.49.71-2.77,2.54-2.77,2.54l-.64-.41c-.64-.41-2.16-.96-3.73-1.03-1.57-.07-3.23.59-3.37,1.55-.14.96.47,1.36,1.08,1.46.44.07.69-.07.86-.21.38-.3.57-.21.35.13-.22.34-.98.48-.98.48,0,0-1.66.24-2.01-1.22-.34-1.46.71-2.25,1.12-2.56.42-.32.96-1.19,1.2-1.62.24-.43.99-3.68-.21-4.29-1.4-.71-1.43.7-1.43.7,0,0-.86-1.11.04-2.14.78-.88,2.01-.49,2.01-.49l-.03-2.49,2.69-2.24s-2.02.17-3.75-.53-1.93-2.92-1.64-3.78c.18-.54.38-.38.38-.38,0,0-.16.83.49,1.58.69.79,1.95.92,3.32.86,1.37-.06,5.07-.93,5.07-.93,0,0,.27.11,1.04.5.76.38,1.15.78,2.24,1.82,1.09,1.04,1.86,3.06,1.86,3.06v8.75ZM33.71,12.97c-.2.17-.45.37-.46,1.06,0,.69-.11,2.74-1.94,6.5-1.83,3.75-2.37,4.37-2.43,4.62-.06.25.13.57.59.46s.65-.24.71-.06c.05.18-.17.41-.46.56s-1.32.52-2.14,1.35-1.03,1.45-1.03,1.45c0,0-.1.03-.16.02-.05,0-.07-.07-.07-.07l-2.52-7.73c-.05-.05-.11-.08-.17-.12-1.4-.71-1.43.7-1.43.7,0,0-.86-1.11.04-2.14.26-.3.58-.45.88-.53l-1.69-5.17s-.34-.88-.76-.98c-.43-.09-.81-.07-1,.14s-.41.52-.41.52c0,0-.23-.28.03-.62.25-.34,1.1-1.2,1.82-1.55.72-.35,1.56-.28,2.01.14s.45.62.54.67l.09.05s.57-.7.93-.87c.37-.17.74-.23.91-.1s.02.27-.08.28c0,0-.36.09-.56.37-.2.28-.5,1.31-.36,1.96.14.64.93,2.88.93,2.88l2.76,8.13s1.91-3.28,2.69-6.34c.26-1,.41-1.76.49-2.36h-3.41s-1.04.1-1.55-.75c-.52-.85.4-1.78.9-2.24.5-.46,3.06-2.63,3.06-2.63,0,0,1.41,1.12,2.16,1.26.75.14.89.09,1.29-.32l.4-.41s.23.34,0,.78c-.22.44-.4.88-.6,1.05Z"/>
+                        <path d="M30.94,14.26c-.67-.41-2.17-1.12-2.17-1.12,0,0-1.25.69-1.56,1.16s-.42,1.3.92,1.43c1.14.11,2.9.18,3.37.18.06-.95-.15-1.41-.55-1.66Z"/>
+                        <path d="M11.42,23.18c.64-1.39.57-3.79.57-3.79,0,0-.1-3.48-.02-3.97.09-.49.62-1.26.62-1.26l-.91.22s-.5.49-.68,1.67c0,0,.04,4.22.02,4.79-.03.57-.16,2.13-.6,2.79s-.82,1.17-1.14,1.47c-.32.3-.87.87-.87.87l1.03-.57s1.32-.85,1.97-2.23Z"/>
+                    </g>
+                    
+                    <!-- Logo que se llena de blanco de abajo hacia arriba -->
+                    <g fill="white" mask="url(#fillMask)">
+                        <path d="M13.86,20.03c-.38.03-.77.26-.98.41,0,.41-.01.71-.02.82-.04.57-.26,1.47-.86,2.31-.59.85-1.88,1.63-1.88,1.63,0,0,1.36-.42,3.06-.26,1.5.14,2.97,1.04,2.97,1.04,0,0,.26-.27.47-.41s.65-.37.65-.37v-5.65c-.64.63-1.33.81-1.69.8-.39-.01-1.17-.36-1.73-.32Z"/>
+                        <path d="M13.4,17.87c-.2-.1-.37-.23-.5-.36,0,.77,0,1.65-.01,2.37.25-.2.62-.51.96-.59.42-.11.87.07,1.27.17.4.1.99.21,1.32.07.23-.09.63-.37.84-.52v-.96c-.21.05-.49.13-.88.26-1.53.52-2.41-.13-3-.44Z"/>
+                        <path d="M14.38,14.3c-.99-.47-1.25-.1-1.38.06-.18.21-.1,1.27-.1,1.27,0,0,0,.44,0,1.07.09.1,1.06,1.16,2.21,1.19,1.13.03,1.7-.27,2.17-.28v-.02s-.28-.71-.78-1.34c-.49-.64-1.39-1.59-2.12-1.93Z"/>
+                        <path d="M20,0C8.95,0,0,8.95,0,20s8.95,20,20,20,20-8.95,20-20S31.05,0,20,0ZM20.23,25.3s-1.71.2-3.21.91c-1.49.71-2.77,2.54-2.77,2.54l-.64-.41c-.64-.41-2.16-.96-3.73-1.03-1.57-.07-3.23.59-3.37,1.55-.14.96.47,1.36,1.08,1.46.44.07.69-.07.86-.21.38-.3.57-.21.35.13-.22.34-.98.48-.98.48,0,0-1.66.24-2.01-1.22-.34-1.46.71-2.25,1.12-2.56.42-.32.96-1.19,1.2-1.62.24-.43.99-3.68-.21-4.29-1.4-.71-1.43.7-1.43.7,0,0-.86-1.11.04-2.14.78-.88,2.01-.49,2.01-.49l-.03-2.49,2.69-2.24s-2.02.17-3.75-.53-1.93-2.92-1.64-3.78c.18-.54.38-.38.38-.38,0,0-.16.83.49,1.58.69.79,1.95.92,3.32.86,1.37-.06,5.07-.93,5.07-.93,0,0,.27.11,1.04.5.76.38,1.15.78,2.24,1.82,1.09,1.04,1.86,3.06,1.86,3.06v8.75ZM33.71,12.97c-.2.17-.45.37-.46,1.06,0,.69-.11,2.74-1.94,6.5-1.83,3.75-2.37,4.37-2.43,4.62-.06.25.13.57.59.46s.65-.24.71-.06c.05.18-.17.41-.46.56s-1.32.52-2.14,1.35-1.03,1.45-1.03,1.45c0,0-.1.03-.16.02-.05,0-.07-.07-.07-.07l-2.52-7.73c-.05-.05-.11-.08-.17-.12-1.4-.71-1.43.7-1.43.7,0,0-.86-1.11.04-2.14.26-.3.58-.45.88-.53l-1.69-5.17s-.34-.88-.76-.98c-.43-.09-.81-.07-1,.14s-.41.52-.41.52c0,0-.23-.28.03-.62.25-.34,1.1-1.2,1.82-1.55.72-.35,1.56-.28,2.01.14s.45.62.54.67l.09.05s.57-.7.93-.87c.37-.17.74-.23.91-.1s.02.27-.08.28c0,0-.36.09-.56.37-.2.28-.5,1.31-.36,1.96.14.64.93,2.88.93,2.88l2.76,8.13s1.91-3.28,2.69-6.34c.26-1,.41-1.76.49-2.36h-3.41s-1.04.1-1.55-.75c-.52-.85.4-1.78.9-2.24.5-.46,3.06-2.63,3.06-2.63,0,0,1.41,1.12,2.16,1.26.75.14.89.09,1.29-.32l.4-.41s.23.34,0,.78c-.22.44-.4.88-.6,1.05Z"/>
+                        <path d="M30.94,14.26c-.67-.41-2.17-1.12-2.17-1.12,0,0-1.25.69-1.56,1.16s-.42,1.3.92,1.43c1.14.11,2.9.18,3.37.18.06-.95-.15-1.41-.55-1.66Z"/>
+                        <path d="M11.42,23.18c.64-1.39.57-3.79.57-3.79,0,0-.1-3.48-.02-3.97.09-.49.62-1.26.62-1.26l-.91.22s-.5.49-.68,1.67c0,0,.04,4.22.02,4.79-.03.57-.16,2.13-.6,2.79s-.82,1.17-1.14,1.47c-.32.3-.87.87-.87.87l1.03-.57s1.32-.85,1.97-2.23Z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="loading-text">Cargando experiencia...</div>
+            <div class="loading-bar">
+                <div class="loading-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-crazy text-center py-10 px-5">
+        <div class="footer-crazy-content">
+            <p class="footer-crazy-text">🔥 © 2025 · Forjado con pasión y mucho café ☕</p>
+            <div class="footer-crazy-glow"></div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Loading screen
+        window.addEventListener('load', function() {
+            const loadingScreen = document.querySelector('.loading-screen');
+            const loadingFill = document.querySelector('.loading-fill');
+            
+            // Animate loading bar
+            setTimeout(() => {
+                loadingFill.style.width = '100%';
+            }, 500);
+            
+            // Hide loading screen
+            setTimeout(() => {
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    initCrazyEffects();
+                }, 500);
+            }, 2000);
+        });
+
+        // Initialize crazy effects
+        function initCrazyEffects() {
+            initCustomCursor();
+            initNameAnimation();
+            initFloatingSkills();
+            initScrollProgress();
+            initStatsCounter();
+            initTypewriterCrazy();
+        }
+
+        // Custom cursor
+        function initCustomCursor() {
+            const cursor = document.querySelector('.custom-cursor');
+            const trail = document.querySelector('.cursor-trail');
+            
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                
+                setTimeout(() => {
+                    trail.style.left = e.clientX + 'px';
+                    trail.style.top = e.clientY + 'px';
+                }, 100);
+            });
+        }
+
+        // Name animation
+        function initNameAnimation() {
+            const letters = document.querySelectorAll('.name-letter');
+            letters.forEach((letter, index) => {
+                letter.addEventListener('mouseenter', () => {
+                    letter.style.transform = 'scale(1.2) rotate(10deg)';
+                    letter.style.color = 'var(--vegeta)';
+                });
+                
+                letter.addEventListener('mouseleave', () => {
+                    letter.style.transform = 'scale(1) rotate(0deg)';
+                    letter.style.color = 'var(--text-1)';
+                });
+            });
+        }
+
+        // Floating skills
+        function initFloatingSkills() {
+            const skills = document.querySelectorAll('.skill-bubble');
+            skills.forEach((skill, index) => {
+                skill.style.animationDelay = `${index * 0.5}s`;
+                
+                skill.addEventListener('click', () => {
+                    skill.style.transform = 'scale(1.5) rotate(360deg)';
+                    setTimeout(() => {
+                        skill.style.transform = 'scale(1) rotate(0deg)';
+                    }, 600);
+                });
+            });
+        }
+
+        // Scroll progress
+        function initScrollProgress() {
+            const progressBar = document.querySelector('.scroll-progress-bar');
+            
+            window.addEventListener('scroll', () => {
+                const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+                progressBar.style.width = scrolled + '%';
+            });
+        }
+
+        // Stats counter
+        function initStatsCounter() {
+            const statItems = document.querySelectorAll('.stat-crazy-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = parseInt(entry.target.dataset.target);
+                        const numberEl = entry.target.querySelector('.stat-crazy-number');
+                        const fillEl = entry.target.querySelector('.stat-crazy-fill');
+                        
+                        animateNumber(numberEl, target);
+                        fillEl.style.width = '100%';
+                    }
+                });
+            });
+            
+            statItems.forEach(item => observer.observe(item));
+        }
+
+        function animateNumber(element, target) {
+            let current = 0;
+            const increment = target / 100;
+            const timer = setInterval(() => {
+                current += increment;
+                element.textContent = Math.floor(current);
+                if (current >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                }
+            }, 20);
+        }
+
+        // Crazy typewriter
+        function initTypewriterCrazy() {
+            const typewriterElement = document.querySelector('.typewriter-crazy');
+            if (typewriterElement) {
+                const skills = [
+                    'user research',
+                    'design systems',
+                    'vibe coding',
+                    'innovation',
+                    'magic ✨'
+                ];
+                
+                const colors = [
+                    'var(--vegeta)',
+                    'var(--seiya)', 
+                    'var(--piccolo)',
+                    'var(--saiyajin)',
+                    'var(--beerus)'
+                ];
+                
+                let currentSkill = 0;
+                let currentChar = 0;
+                let isDeleting = false;
+                
+                function typeWriter() {
+                    const skill = skills[currentSkill];
+                    const color = colors[currentSkill];
+                    
+                    typewriterElement.style.color = color;
+                    typewriterElement.style.textShadow = `0 0 20px ${color}`;
+                    
+                    if (isDeleting) {
+                        typewriterElement.textContent = skill.substring(0, currentChar - 1);
+                        currentChar--;
+                    } else {
+                        typewriterElement.textContent = skill.substring(0, currentChar + 1);
+                        currentChar++;
+                    }
+                    
+                    if (!isDeleting && currentChar === skill.length) {
+                        setTimeout(() => isDeleting = true, 2000);
+                    } else if (isDeleting && currentChar === 0) {
+                        isDeleting = false;
+                        currentSkill = (currentSkill + 1) % skills.length;
+                    }
+                    
+                    setTimeout(typeWriter, isDeleting ? 50 : 100);
+                }
+                
+                setTimeout(typeWriter, 1000);
+            }
+        }
+
+        // Crazy theme toggle
+        function toggleCrazyTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-crazy-icon');
+            const explosion = document.querySelector('.theme-explosion');
+            
+            // Trigger explosion effect
+            explosion.style.animation = 'themeExplosion 0.8s ease-out';
+            
+            setTimeout(() => {
+                const currentTheme = body.getAttribute('data-theme');
+                
+                if (currentTheme === 'dark') {
+                    body.removeAttribute('data-theme');
+                    themeIcon.setAttribute('data-feather', 'moon');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    body.setAttribute('data-theme', 'dark');
+                    themeIcon.setAttribute('data-feather', 'sun');
+                    localStorage.setItem('theme', 'dark');
+                }
+                
+                feather.replace();
+                explosion.style.animation = '';
+            }, 400);
+        }
+
+        // Crazy menu toggle
+        function toggleCrazyMenu() {
+            const navLinks = document.getElementById('nav-crazy-links');
+            const hamburger = document.querySelector('.hamburger-crazy');
+            
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

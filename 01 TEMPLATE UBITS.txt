@@ -1,0 +1,90 @@
+﻿1. Portada del proyecto
+Nombre del proyecto
+UBITS TEMPLATE
+Logo/imagen principal/mockup
+Placeholder de imagen
+Overview
+La plantilla definitiva para quienes quieren crear experiencias UBITS auténticas sin complicaciones técnicas. Solo se necesita una idea y Cursor AI.
+
+
+2. Contexto / Introducción
+Cliente o marca (si aplica)
+UBITS
+Año
+2025
+Rol que tuviste
+Mi rol fue ejecutar el proyecto end-to-end: desde la ideación, el diseño y la construcción del MVP, hasta la consolidación del producto, bajo la dirección estratégica de mi jefe, Kike Peña.
+Herramientas usadas
+Figma, Cursor AI
+
+
+
+
+3. Problema / Desafío
+Qué problema había que resolver
+El proceso de validación de ideas en UBITS era lento y poco eficiente. Los equipos solían arrancar en Miro y luego pasar a Figma, lo cual podría tomar un buen tiempo en construir flujos y prototipos antes de llegar a algo que pudiera compartirse. A esto se sumaba la falta de agilidad para generar múltiples versiones de una misma idea, lo que restringía la exploración de alternativas y limitaba la innovación.
+
+
+Objetivos del proyecto
+* Agilizar la validación de ideas mediante una herramienta de vibe coding que permita a stakeholders, product managers y diseñadores construir flujos y prototipos en tiempo récord hacer pruebas de usuario.
+* Garantizar la consistencia visual de todas las propuestas, al hacer que la herramienta genere interfaces que ya tienen los tokens de colores (light y dark mode), tipografías oficiales, íconos y componentes del sistema de diseño de UBITS.
+* Facilitar la generación de múltiples versiones de una misma idea, permitiendo que distintos perfiles del equipo puedan proponer variaciones rápidas sin comprometer recursos ni mucho tiempo.
+
+
+
+
+4. Fase 1. MVP
+
+
+1. Ideación
+
+
+La iniciativa surgió a partir de la necesidad de agilizar el proceso de validación de ideas en uBit. Después de discutirlo con mi jefe, acordamos que el siguiente paso debía ser construir un MVP que demostrara la viabilidad de la propuesta.
+
+
+2. Prototipo inicial
+
+
+Como punto de partida, diseñé en Figma una plantilla base que incluía los elementos esenciales de la interfaz: un sidebar, un topnav y un área central compuesta por varias cajas blancas que funcionarían como widgets.
+
+
+3. Construcción del MVP
+
+
+Con esa plantilla, avancé a Cursor con ayuda del MCT y desarrollé un template funcional. Lo disponibilicé en GitHub para que cualquier miembro del equipo pudiera importarlo directamente en un nuevo proyecto de Cursor y comenzar a trabajar con él de inmediato.
+
+
+4. Prueba de validación
+
+
+La prueba consistió en que un usuario rellenara un widget mediante un prompt, solicitando elementos como un card, un plan de formación, un progress bar y botones. El sistema generó el resultado en menos de 20 segundos, lo que sorprendió positivamente a los stakeholders. Esta validación confirmó el potencial de la herramienta y permitió obtener la luz verde para avanzar con el proyecto.
+
+
+
+
+
+
+5. Solución final
+1. Incorporación de lineamientos visuales
+
+
+Una vez validado el MVP, el siguiente paso fue integrar la identidad gráfica de uBit dentro de la herramienta. Importé los tokens de color con soporte para modo claro y oscuro, así como los estilos de texto, espaciado y border radius.
+
+
+2. Integración del sistema de diseño
+
+
+Para garantizar consistencia y escalabilidad, incorporé los componentes oficiales del sistema de diseño directamente en Cursor. De esta manera, cualquier flujo o prototipo generado por la herramienta ya cumplía con los lineamientos de marca desde el inicio.
+
+
+6. Resultados / Impacto
+3. Refinamiento y escalabilidad
+Este proceso permitió que los equipos trabajaran con mayor confianza, ya que los outputs no solo se producían en segundos, sino que también estaban alineados con la identidad visual y los estándares de diseño de la compañía, eliminando la necesidad de ajustes posteriores y potenciando la innovación ágil.
+
+
+7. Reflexiones personales
+De este proyecto aprendí el poder de prototipar con velocidad y consistencia: cómo un MVP puede transformar la validación de ideas, facilitar la colaboración entre perfiles diversos y abrir espacio a más innovación en menos tiempo.
+
+
+8. CTA / Navegación
+Cards de los otros proyectos

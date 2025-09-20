@@ -209,6 +209,106 @@ function initProjectCardFocus() {
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     initProjectCardFocus();
+    initParallaxEffects();
 });
 
+// Parallax effects for case study images
+function initParallaxEffects() {
+    const parallaxElements = document.querySelectorAll('.slide-image, .gallery-image, .tool-image, .avatar-image');
+    
+    if (parallaxElements.length === 0) return;
+    
+    let ticking = false;
+    
+    function updateParallax() {
+        const scrolled = window.pageYOffset;
+        
+        parallaxElements.forEach(element => {
+            const rect = element.getBoundingClientRect();
+            const speed = element.dataset.speed || 0.5;
+            const yPos = -(scrolled * speed);
+            
+            // Only apply parallax if element is in viewport
+            if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
+                element.style.transform = `translateY(${yPos}px)`;
+            }
+        });
+        
+        ticking = false;
+    }
+    
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(updateParallax);
+            ticking = true;
+        }
+    }
+    
+    window.addEventListener('scroll', requestTick);
+}
+
+// Enhanced slider functionality for case study
+function initCaseStudySlider() {
+    const slides = document.querySelectorAll('.screen-slide');
+    const dots = document.querySelectorAll('.dot');
+    let currentSlideIndex = 0;
+    
+    if (slides.length === 0) return;
+    
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (dots[i]) dots[i].classList.remove('active');
+        });
+        
+        if (slides[index]) {
+            slides[index].classList.add('active');
+            if (dots[index]) dots[index].classList.add('active');
+        }
+        currentSlideIndex = index;
+    }
+    
+    // Auto-advance slides every 5 seconds
+    setInterval(() => {
+        const nextIndex = (currentSlideIndex + 1) % slides.length;
+        showSlide(nextIndex);
+    }, 5000);
+    
+    // Initialize first slide
+    showSlide(0);
+}
+
+// Initialize case study slider when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initCaseStudySlider();
+});
+
+// Intersection Observer for scroll animations
+function initScrollAnimations() {
+    const animatedElements = document.querySelectorAll('.persona-card, .problem-card, .solution-card, .design-element');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+    
+    animatedElements.forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(30px)';
+        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(element);
+    });
+}
+
+// Initialize scroll animations
+document.addEventListener('DOMContentLoaded', function() {
+    initScrollAnimations();
+});
 
